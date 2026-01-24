@@ -2,4 +2,35 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white2">#FBF9F9</color>
+    <color name="white3">#BCAAA4</color>
+    <color name="green1">#1B5E20</color>
+    <color name="green2">#2E7D32</color>
+    <color name="green3">#388E3C</color>
+    <color name="green4">#4CAF50</color>
+    <color name="green5">#66BB6A</color>
+    <color name="green6">#AED581</color>
+    <color name="orange1">#FFEE58</color>
+    <color name="orange2">#FFEB3B</color>
+    <color name="orange3">#FFB300</color>
+    <color name="orange4">#FFC107</color>
+    <color name="orange5">#FFD54F</color>
+    <color name="orange6">#FF5722</color>
+    <color name="orange7">#FF3D00</color>
+    <color name="orange8">#BF360C</color>
+    <color name="blue1">#1A237E</color>
+    <color name="blue2">#0D47A1</color>
+    <color name="blue3">#2196F3</color>
+    <color name="blue4">#42A5F5</color>
+    <color name="blue5">#64B5F6</color>
+    <color name="blue6">#90CAF9</color>
+    <color name="blue7">#BBDEFB</color>
+    <color name="teel_blue">#263238</color>
+    <color name="grey1">#FAFAFA</color>
+    <color name="grey2">#464240</color>
+    <color name="grey3">#212121</color>
+    <color name="brown">#BCAAA4</color>
+    <color name="pink1">#F48FB1</color>
+    <color name="pink2">#F8BBD0</color>
+    <color name="pink3">#FCE4EC</color>
 </resources>

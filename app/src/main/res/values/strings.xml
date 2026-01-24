@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">App</string>
+
+    <string name="title1"> Discover New Flavors </string>
+    <string name="desc_title1">
+        Explore thousands of smart recipes tailored to
+        your taste buds and dietary goals. Cooking just
+        got more exciting.
+    </string>
+
+    <string name="title2"> Plan Your Week </string>
+    <string name="desc_title2">
+        Save time and eat healthier by scheduling
+        your meals in advance.
+    </string>
+
+    <string name="title3"> Have Fun ! </string>
+    <string name="desc_title3"> enjoy the app made me happy </string>
+
+
+
 </resources>
