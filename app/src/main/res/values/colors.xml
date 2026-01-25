@@ -26,11 +26,15 @@
     <color name="blue6">#90CAF9</color>
     <color name="blue7">#BBDEFB</color>
     <color name="teel_blue">#263238</color>
-    <color name="grey1">#FAFAFA</color>
+    <color name="grey1">#5F5F5F</color>
     <color name="grey2">#464240</color>
     <color name="grey3">#212121</color>
-    <color name="brown">#BCAAA4</color>
+    <color name="brown1">#BCAAA4</color>
+    <color name="brown2">#593D34</color>
+    <color name="brown3">#684437</color>
     <color name="pink1">#F48FB1</color>
     <color name="pink2">#F8BBD0</color>
     <color name="pink3">#FCE4EC</color>
+    <color name="divider_color">#E0E0E0</color>
+
 </resources>

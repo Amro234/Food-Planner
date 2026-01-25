@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
         <activity
-            android:name=".view_pager"
+            android:name=".auth.AuthActivity"
             android:exported="false" />
         <activity
             android:name=".on_boarding"
