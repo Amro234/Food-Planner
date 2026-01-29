@@ -36,5 +36,11 @@
     <color name="pink2">#F8BBD0</color>
     <color name="pink3">#FCE4EC</color>
     <color name="divider_color">#E0E0E0</color>
-
+    <color name="red1">#EF5350</color>
+    <color name="red2">#F44336</color>
+    <color name="red3">#E53935</color>
+    <color name="red4">#D50000</color>
+    <color name="red5">#D32F2F</color>
+    <color name="red6">#AD1C19</color>
+    <color name="red7">#EB0707</color>
 </resources>

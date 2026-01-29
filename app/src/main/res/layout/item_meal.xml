@@ -16,10 +16,37 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Meal Image"
+            android:contentDescription="@string/holder_image"
+            android:src="@drawable/image_holder"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Love_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginVertical="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/red1"
+            app:strokeWidth="1dp"
+            app:cardBackgroundColor="@color/white"
+            android:contentDescription="@string/love">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/love_ic"
+                android:contentDescription="@string/love" />
+        </com.google.android.material.card.MaterialCardView>
 
         <View
             android:layout_width="match_parent"
@@ -31,7 +58,7 @@
             android:id="@+id/meal_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Avocado Toast"
+            android:text="@string/Meal_Title"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -46,7 +73,7 @@
             android:id="@+id/meal_category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="20 mins • 250 kcal"
+            android:text="@string/Meal_time"
             android:textColor="#EEEEEE"
             android:textSize="11sp"
             android:paddingStart="8dp"
