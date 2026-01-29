@@ -28,7 +28,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:contentDescription="Meal Image" />
+                    android:src="@drawable/image_holder"
+                    android:contentDescription="@string/holder_image" />
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Content -->
@@ -43,7 +44,7 @@
                     android:id="@+id/meal_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Classic Margherita Pizza"
+                    android:text="@string/Meal_Title"
                     android:textColor="#000000"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -54,92 +55,16 @@
                     android:id="@+id/meal_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Italian • Pizza"
+                    android:text="@string/sub_desc"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:layout_marginBottom="16dp" />
-
-                <!-- Time and Calories -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="24dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginEnd="24dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@android:drawable/ic_menu_recent_history"
-                            android:contentDescription="Prep Time"
-                            android:layout_gravity="center_horizontal" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="18 min"
-                            android:textColor="#000000"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginEnd="24dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@android:drawable/ic_menu_recent_history"
-                            android:contentDescription="Cook Time"
-                            android:layout_gravity="center_horizontal" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="12 min"
-                            android:textColor="#000000"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@android:drawable/ic_menu_info_details"
-                            android:contentDescription="Calories"
-                            android:layout_gravity="center_horizontal" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="450 kcal"
-                            android:textColor="#000000"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-                </LinearLayout>
 
                 <!-- Ingredients Section -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🥗 Ingredients"
+                    android:text="@string/ingredients"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -149,7 +74,7 @@
                     android:id="@+id/ingredients_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="• San Marzano Tomatoes\n• Mozzarella\n• Fresh Basil\n• Fresh Dough"
+                    android:text="@string/ing_info"
                     android:textColor="#333333"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp"
@@ -159,7 +84,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🎥 Cooking Tutorial"
+                    android:text="@string/record"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -202,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📝 Cooking Steps"
+                    android:text="@string/Steps"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -212,7 +137,7 @@
                     android:id="@+id/meal_instructions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1. Prepare the dough\n2. Add sauce and cheese\n3. Bake at high temperature"
+                    android:text="@string/Description"
                     android:textColor="#333333"
                     android:textSize="14sp"
                     android:lineSpacingExtra="6dp"
@@ -228,10 +153,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@android:drawable/btn_star_big_off"
-        android:contentDescription="Add to Favorites"
-        app:tint="#FFFFFF"
-        app:backgroundTint="#FF6B35" />
+        android:src="@drawable/love_ic"
+        android:contentDescription="@string/love"
+        app:tint="@color/red3"
+        app:backgroundTint="@color/blue5" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

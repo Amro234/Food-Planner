@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_id"
+        android:title="@string/Home"
+        android:icon="@drawable/home_ic"
+        />
+
+    <item
+        android:id="@+id/fav_id"
+        android:title="@string/Fav"
+        android:icon="@drawable/fav_ic"
+        />
+
+    <item
+        android:id="@+id/plan_id"
+        android:title="@string/plan"
+        android:icon="@drawable/plan_ic"
+
+        />
+    <item
+        android:id="@+id/logout_id"
+        android:title="@string/logout"
+        android:icon="@drawable/logout_ic"/>
+</menu>
