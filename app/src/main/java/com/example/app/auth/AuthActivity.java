@@ -22,5 +22,19 @@ public class AuthActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Initialize ViewPager2
+        androidx.viewpager2.widget.ViewPager2 viewPager = findViewById(R.id.viewPager);
+        AuthPagerAdapter adapter = new AuthPagerAdapter(this);
+        viewPager.setAdapter(adapter);
+    }
+
+    public void showLogin() {
+        androidx.viewpager2.widget.ViewPager2 viewPager = findViewById(R.id.viewPager);
+        viewPager.setCurrentItem(0, true);
+    }
+
+    public void showSignup() {
+        androidx.viewpager2.widget.ViewPager2 viewPager = findViewById(R.id.viewPager);
+        viewPager.setCurrentItem(1, true);
     }
 }

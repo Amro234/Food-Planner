@@ -62,7 +62,7 @@ public class on_boarding extends AppCompatActivity {
 
     private void saveOneTimeState() {
         saveState.setState(1);
-        Intent intent = new Intent(on_boarding.this, MainActivity.class);
+        Intent intent = new Intent(on_boarding.this, com.example.app.auth.AuthActivity.class);
         startActivity(intent);
         finish();
     }
