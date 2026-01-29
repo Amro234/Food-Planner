@@ -28,7 +28,7 @@ public class splashscreen extends AppCompatActivity {
             public void run() {
                 Intent intent;
                 if (saveState.getState() == 1) {
-                    intent = new Intent(splashscreen.this, MainActivity.class);
+                    intent = new Intent(splashscreen.this, com.example.app.auth.AuthActivity.class);
                 } else {
                     intent = new Intent(splashscreen.this, on_boarding.class);
                 }

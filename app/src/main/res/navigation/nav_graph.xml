@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.logic_mvp.presentation.Home.HomeFragment"
+        android:label="YumPlan"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_mealList"
+            app:destination="@id/mealListFragment" />
+        <action
+            android:id="@+id/action_home_to_mealDetails"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealListFragment"
+        android:name="com.example.logic_mvp.presentation.meal.MealListFragment"
+        android:label="Meals"
+        tools:layout="@layout/fragment_mealitem">
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_mealList_to_details"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealDetailsFragment"
+        android:name="com.example.logic_mvp.presentation.details.MealDetailsFragment"
+        android:label="Recipe Details"
+        tools:layout="@layout/fragment_mealdetails">
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+    </fragment>
+
+</navigation>
