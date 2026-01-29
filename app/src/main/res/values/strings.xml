@@ -14,6 +14,8 @@
     </string>
     <string name="title3"> Have Fun ! </string>
     <string name="desc_title3"> enjoy the app made me happy </string>
+    <string name="skip"> SKIP </string>
+
 
             <!--    Fragment Login  -->
     <string name="login_title">Login</string>

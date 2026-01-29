@@ -7,6 +7,17 @@
     android:fitsSystemWindows="false"
     tools:context=".on_boarding">
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="90dp"
+        android:layout_height="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="12dp"
+        android:text="@string/skip"
+        android:textColor="@color/orange4"
+        android:backgroundTint="@color/blue7"/>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/next_card"
         android:layout_width="56dp"
