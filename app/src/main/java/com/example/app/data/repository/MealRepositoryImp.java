@@ -1,15 +1,15 @@
-package com.example.logic_mvp.data.repository;
+package com.example.app.data.repository;
 
 import android.content.Context;
 
-import com.example.logic_mvp.Database.MealEntity;
-import com.example.logic_mvp.data.datasource.local.MealLocalDataSource;
-import com.example.logic_mvp.data.datasource.local.MealLocalDataSourceImp;
-import com.example.logic_mvp.data.datasource.remote.MealRemoteDataSource;
-import com.example.logic_mvp.data.datasource.remote.MealRemoteDataSourceImp;
-import com.example.logic_mvp.data.model.CategoryResponse;
-import com.example.logic_mvp.data.model.Meal;
-import com.example.logic_mvp.data.model.MealResponse;
+import com.example.app.Database.MealEntity;
+import com.example.app.data.datasource.local.MealLocalDataSource;
+import com.example.app.data.datasource.local.MealLocalDataSourceImp;
+import com.example.app.data.datasource.remote.MealRemoteDataSource;
+import com.example.app.data.datasource.remote.MealRemoteDataSourceImp;
+import com.example.app.data.model.CategoryResponse;
+import com.example.app.data.model.Meal;
+import com.example.app.data.model.MealResponse;
 
 import java.util.List;
 
@@ -56,6 +56,16 @@ public class MealRepositoryImp implements MealRepository {
     }
 
     @Override
+    public Single<com.example.app.data.model.AreaResponse> getAreas() {
+        return remoteDataSource.getAreas();
+    }
+
+    @Override
+    public Single<MealResponse> searchMeals(String query) {
+        return remoteDataSource.searchMeals(query);
+    }
+
+    @Override
     public Flowable<List<MealEntity>> getFavoriteMeals() {
         return localDataSource.getAllFavoriteMeals();
     }
@@ -69,7 +79,25 @@ public class MealRepositoryImp implements MealRepository {
 
     @Override
     public Completable removeFromFavorites(String mealId) {
-        return localDataSource.deleteMealById(mealId);
+        return localDataSource.updateFavoriteStatus(mealId, false);
+    }
+
+    @Override
+    public Flowable<List<MealEntity>> getPlannedMeals() {
+        return localDataSource.getPlannedMeals();
+    }
+
+    @Override
+    public Completable addToPlan(Meal meal, String day) {
+        MealEntity entity = MealMapper.toEntity(meal);
+        entity.setPlanned(true);
+        entity.setPlannedDay(day);
+        return localDataSource.insertMeal(entity);
+    }
+
+    @Override
+    public Completable removeFromPlan(String mealId) {
+        return localDataSource.updatePlannedStatus(mealId, false, null);
     }
 
     private MealEntity convertMealToEntity(Meal meal) {

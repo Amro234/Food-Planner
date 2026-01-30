@@ -51,14 +51,38 @@
                     android:layout_marginBottom="8dp" />
 
                 <!-- Category and Area -->
-                <TextView
-                    android:id="@+id/meal_category"
-                    android:layout_width="wrap_content"
+                <!-- Category and Area -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sub_desc"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="16dp" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/meal_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sub_desc"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="|"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/meal_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Area"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
                 <!-- Ingredients Section -->
                 <TextView
@@ -147,8 +171,9 @@
     </androidx.core.widget.NestedScrollView>
 
     <!-- FAB for Add to Favorites -->
+    <!-- FAB for Add to Favorites -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_favorite"
+        android:id="@+id/addToFavButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -159,7 +184,7 @@
         app:backgroundTint="@color/blue5" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -1,6 +1,7 @@
-package com.example.logic_mvp.data.datasource.local;
+package com.example.app.data.datasource.local;
 
-import com.example.logic_mvp.Database.MealEntity;
+import com.example.app.Database.MealDAO;
+import com.example.app.Database.MealEntity;
 
 import java.util.List;
 
@@ -22,5 +23,9 @@ public interface MealLocalDataSource {
 
     Completable deleteMealById(String mealId);
 
+    Flowable<List<MealEntity>> getPlannedMeals();
+
     Completable updateFavoriteStatus(String mealId, boolean isFavorite);
+
+    Completable updatePlannedStatus(String mealId, boolean isPlanned, String day);
 }

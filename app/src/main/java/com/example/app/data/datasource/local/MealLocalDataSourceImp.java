@@ -1,10 +1,10 @@
-package com.example.logic_mvp.data.datasource.local;
+package com.example.app.data.datasource.local;
 
 import android.content.Context;
 
-import com.example.logic_mvp.Database.AppDataBase;
-import com.example.logic_mvp.Database.MealDAO;
-import com.example.logic_mvp.Database.MealEntity;
+import com.example.app.Database.AppDataBase;
+import com.example.app.Database.MealDAO;
+import com.example.app.Database.MealEntity;
 
 import java.util.List;
 
@@ -52,7 +52,17 @@ public class MealLocalDataSourceImp implements MealLocalDataSource {
     }
 
     @Override
+    public Flowable<List<MealEntity>> getPlannedMeals() {
+        return mealDAO.getPlannedMeals();
+    }
+
+    @Override
     public Completable updateFavoriteStatus(String mealId, boolean isFavorite) {
         return mealDAO.updateFavoriteStatus(mealId, isFavorite);
+    }
+
+    @Override
+    public Completable updatePlannedStatus(String mealId, boolean isPlanned, String day) {
+        return mealDAO.updatePlannedStatus(mealId, isPlanned, day);
     }
 }

@@ -1,5 +1,6 @@
-package com.example.logic_mvp.data.model;
+package com.example.app.data.model;
 
+import com.example.app.data.model.Category;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;

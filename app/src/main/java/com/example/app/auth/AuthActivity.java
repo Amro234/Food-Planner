@@ -29,6 +29,7 @@ public class AuthActivity extends AppCompatActivity {
         androidx.viewpager2.widget.ViewPager2 viewPager = findViewById(R.id.viewPager);
         AuthPagerAdapter adapter = new AuthPagerAdapter(this);
         viewPager.setAdapter(adapter);
+        viewPager.setUserInputEnabled(false); // Disable user swiping
     }
 
     public void showLogin() {
@@ -40,6 +41,5 @@ public class AuthActivity extends AppCompatActivity {
         androidx.viewpager2.widget.ViewPager2 viewPager = findViewById(R.id.viewPager);
         viewPager.setCurrentItem(1, true);
     }
-
 
 }

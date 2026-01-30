@@ -25,4 +25,14 @@ public class SaveState {
         return sp.getInt("state", 0);
     }
 
+    public void setGuest(boolean isGuest) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("is_guest", isGuest);
+        editor.apply();
+    }
+
+    public boolean isGuest() {
+        return sp.getBoolean("is_guest", false);
+    }
+
 }

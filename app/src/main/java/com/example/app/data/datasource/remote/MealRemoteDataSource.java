@@ -1,7 +1,7 @@
-package com.example.logic_mvp.data.datasource.remote;
+package com.example.app.data.datasource.remote;
 
-import com.example.logic_mvp.data.model.CategoryResponse;
-import com.example.logic_mvp.data.model.MealResponse;
+import com.example.app.data.model.CategoryResponse;
+import com.example.app.data.model.MealResponse;
 
 import io.reactivex.rxjava3.core.Single;
 
@@ -14,4 +14,8 @@ public interface MealRemoteDataSource {
     Single<MealResponse> getMealsByCategory(String category);
 
     Single<MealResponse> getMealById(String mealId);
+
+    Single<com.example.app.data.model.AreaResponse> getAreas();
+
+    Single<MealResponse> searchMeals(String query);
 }

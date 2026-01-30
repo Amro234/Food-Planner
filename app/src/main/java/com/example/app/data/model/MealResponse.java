@@ -1,9 +1,9 @@
-package com.example.logic_mvp.data.model;
+package com.example.app.data.model;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.example.logic_mvp.data.model.Meal;
+import com.example.app.data.model.Meal;
 import com.google.gson.annotations.SerializedName;
 
 public class MealResponse implements Serializable {
