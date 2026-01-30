@@ -15,14 +15,4 @@
         app:shapeAppearanceOverlay="@style/CircleImageView"
         xmlns:app="http://schemas.android.com/apk/res-auto"/>
 
-    <TextView
-        android:id="@+id/country_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="12dp"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:text="Country Name"/>
-
 </LinearLayout>

@@ -35,16 +35,16 @@
             android:focusable="true"
             app:cardCornerRadius="32dp"
             app:cardElevation="0dp"
-            app:strokeColor="@color/green3"
+            app:strokeColor="@color/red1"
             app:strokeWidth="1dp"
-            app:cardBackgroundColor="@color/white2"
+            app:cardBackgroundColor="@color/white"
             android:contentDescription="@string/love">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/love_ic"
+                android:src="@drawable/trash_ic"
                 android:contentDescription="@string/love" />
         </com.google.android.material.card.MaterialCardView>
 

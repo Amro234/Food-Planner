@@ -1,0 +1,41 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_ingredient"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/image_holder" />
+
+        <TextView
+            android:id="@+id/tv_ingredient_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ing_title"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_ingredient_measure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ing_mes"
+            android:textSize="12sp"
+            android:textColor="#777777" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

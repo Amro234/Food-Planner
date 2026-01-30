@@ -70,7 +70,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="|"
+                        android:text="@string/delm"
                         android:textColor="#666666"
                         android:textSize="14sp"
                         android:layout_marginEnd="8dp" />
@@ -79,30 +79,30 @@
                         android:id="@+id/meal_area"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Area"
+                        android:text="@string/Area"
                         android:textColor="#666666"
                         android:textSize="14sp" />
                 </LinearLayout>
 
                 <!-- Ingredients Section -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ingredients"
                     android:textColor="#000000"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
 
-                <TextView
-                    android:id="@+id/ingredients_list"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_ingredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/ing_info"
-                    android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp"
-                    android:layout_marginBottom="24dp" />
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginBottom="24dp"
+                    tools:listitem="@layout/item_ingredient" />
 
                 <!-- Cooking Tutorial Section -->
                 <TextView
@@ -170,8 +170,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FAB for Add to Favorites -->
-    <!-- FAB for Add to Favorites -->
+                <!-- FAB for Add to Favorites -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addToFavButton"
         android:layout_width="wrap_content"
@@ -180,8 +179,8 @@
         android:layout_margin="16dp"
         android:src="@drawable/love_ic"
         android:contentDescription="@string/love"
-        app:tint="@color/red3"
-        app:backgroundTint="@color/blue5" />
+        app:tint="@color/green3"
+        app:backgroundTint="@color/white2" />
 
     <ProgressBar
         android:id="@+id/progressBar"
