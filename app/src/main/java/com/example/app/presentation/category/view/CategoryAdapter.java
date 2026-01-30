@@ -1,4 +1,4 @@
-package com.example.logic_mvp.presentation.Home.adapter;
+package com.example.app.presentation.category.view;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

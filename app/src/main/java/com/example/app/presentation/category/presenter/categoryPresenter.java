@@ -1,4 +1,4 @@
-package com.example.logic_mvp.presentation.Home.presenter;
+package com.example.app.presentation.category.presenter;
 
 import android.content.Context;
 
@@ -12,13 +12,13 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class HomePresenter implements HomeContract.Presenter {
+public class categoryPresenter implements HomeContract.Presenter {
 
     private final HomeContract.View view;
     private final MealRepository repository;
     private final CompositeDisposable disposables;
 
-    public HomePresenter(HomeContract.View view, Context context) {
+    public categoryPresenter(HomeContract.View view, Context context) {
         this.view = view;
         this.repository = MealRepositoryImp.getInstance(context);
         this.disposables = new CompositeDisposable();

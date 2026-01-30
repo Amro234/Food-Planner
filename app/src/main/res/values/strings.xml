@@ -17,7 +17,7 @@
     <string name="skip"> SKIP </string>
 
 
-            <!--    Fragment Login  -->
+    <!--    Fragment Login  -->
     <string name="login_title">Login</string>
     <string name="signup_title">Sign up</string>"
     <string name="welcome_login">Welcome Back !</string>
@@ -31,7 +31,7 @@
     <string name="continue_with">Or continue with</string>
     <string name="newhere">New here?</string>
 
-            <!--    Sign_Up_Fragment     -->
+    <!--    Sign_Up_Fragment     -->
 
     <string name="create">Create an account</string>
     <string name="newAccount">Create Account</string>
@@ -48,7 +48,7 @@
     <string name="content_facebook">facebook_Icon</string>
     <string name="ImageContent">image</string>
 
-            <!-- Meal Cards / Category  -->
+    <!-- Meal Cards / Category  -->
 
     <string name="Meal_Title">Meal Title</string>
     <string name="Meal_Category">Category</string>
@@ -62,18 +62,21 @@
     <string name="recommended_for_u">Recommended for U 😊</string>
     <string name="love">Love_desc 😊</string>
     <string name="ingredients">🥗 Ingredients</string>
-    <string name="ing_info"> • San Marzano Tomatoes\n• Mozzarella\n• Fresh Basil\n• Fresh Dough </string>>
+    <string name="ing_info"> • San Marzano Tomatoes\n• Mozzarella\n• Fresh Basil\n• Fresh Dough </string>
+    >
     <string name="sub_desc">Italian • Pizza</string>
     <string name="Steps">📝 Cooking Steps</string>
     <string name="record">🎥 Cooking Tutorial</string>
     <string name="Description">1. Prepare the dough\n2. Add sauce and cheese\n3. Bake at high temperature</string>
 
 
-                <!-- Bottom Nav Names  -->
+    <!-- Bottom Nav Names  -->
 
     <string name="Home">Home</string>
     <string name="Fav">Favourite</string>
     <string name="plan">Plan</string>
     <string name="logout">Logout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
