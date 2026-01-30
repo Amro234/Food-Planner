@@ -182,16 +182,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd34591-6ca7-45a9-9678-a3e287b1fb72" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fav.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fav.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/AreaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/AreaResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/Area/view/CountrySpinnerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/Area/view/CountrySpinnerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/home/presenter/HomePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/home/presenter/HomePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/mealdetails/presenter/MealDetailsContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/mealdetails/presenter/MealDetailsContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/mealdetails/presenter/MealDetailsPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/mealdetails/presenter/MealDetailsPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/mealdetails/view/MealDetailsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/mealdetails/view/MealDetailsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/_on_boarding.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/_on_boarding.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mealdetails.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mealdetails.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_plan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_plan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_country_dropdown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_country_dropdown.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_meal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_meal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +300,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "UI",
+    "git-widget-placeholder": "Logic",
     "last_directory_selection": "G:/WORK/ITI/Mobile App Development Deploma/Courses/AUJ/Project/Program/app/src/main/res/values",
     "last_opened_file_path": "G:/WORK/ITI/Mobile App Development Deploma/Courses/AUJ/Project/Program/app/src/main/res/drawable",
     "project.structure.last.edited": "Project",

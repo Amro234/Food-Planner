@@ -8,4 +8,8 @@ public class AreaResponse {
     public List<Area> getAreas() {
         return meals;
     }
+
+    public void setAreas(List<Area> areas) {
+        this.meals = areas;
+    }
 }

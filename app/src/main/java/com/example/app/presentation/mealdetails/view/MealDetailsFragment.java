@@ -9,18 +9,25 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.app.R;
+import com.example.app.data.model.Ingredient;
 import com.example.app.databinding.FragmentMealdetailsBinding;
 import com.example.app.data.model.Meal;
 import com.example.app.presentation.mealdetails.presenter.MealDetailsContract;
 import com.example.app.presentation.mealdetails.presenter.MealDetailsPresenter;
+import com.example.app.presentation.ingerdient.view.IngredientsAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MealDetailsFragment extends Fragment implements MealDetailsContract.View {
 
     private FragmentMealdetailsBinding binding;
     private MealDetailsContract.Presenter presenter;
+    private IngredientsAdapter ingredientsAdapter;
     private String mealId;
 
     @Override
@@ -43,10 +50,22 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ingredientsAdapter = new IngredientsAdapter(new ArrayList<>());
+        binding.ingredientsRecyclerView.setAdapter(ingredientsAdapter);
+
+        binding.ingredientsRecyclerView
+                .setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+
         presenter = new MealDetailsPresenter(this, requireContext());
         if (mealId != null) {
             presenter.getMealById(mealId);
+
         }
+    }
+
+    @Override
+    public void showIngredients(java.util.List<Ingredient> ingredients) {
+        ingredientsAdapter.setList(ingredients);
     }
 
     @Override

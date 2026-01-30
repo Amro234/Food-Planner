@@ -71,6 +71,16 @@ public class HomePresenter implements HomeContract.Presenter {
         disposables.add(
                 repository.getAreas()
                         .subscribeOn(Schedulers.io())
+                        .map(response -> {
+                            if (response != null && response.getAreas() != null) {
+                                java.util.List<com.example.app.data.model.Area> filtered = response.getAreas()
+                                        .stream()
+                                        .filter(area -> !area.getFlagUrl().contains("unknown"))
+                                        .collect(java.util.stream.Collectors.toList());
+                                response.setAreas(filtered);
+                            }
+                            return response;
+                        })
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 response -> {

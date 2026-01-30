@@ -51,6 +51,7 @@ public class CountrySpinnerAdapter extends ArrayAdapter<Area> {
         Area area = getItem(position);
 
         if (area != null) {
+            name.setVisibility(View.GONE);
             name.setText(area.getStrArea());
 
             Glide.with(context)
@@ -80,6 +81,7 @@ public class CountrySpinnerAdapter extends ArrayAdapter<Area> {
         Area area = getItem(position);
 
         if (area != null) {
+            holder.countryNameTextView.setVisibility(View.GONE);
             holder.countryNameTextView.setText(area.getStrArea());
 
             // Load flag using Glide
