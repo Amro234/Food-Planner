@@ -1,7 +1,7 @@
 
-package com.example.logic_mvp.Network.api;
+package com.example.app.Network;
 
-import com.example.logic_mvp.data.datasource.remote.MealApi;
+import com.example.app.data.datasource.remote.MealApi;
 
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.Retrofit;

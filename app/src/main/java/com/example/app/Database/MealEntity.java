@@ -1,4 +1,4 @@
-package com.example.logic_mvp.Database;
+package com.example.app.Database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -65,6 +65,8 @@ public class MealEntity {
     private String strSource;
     private String strImageSource;
     private boolean isFavorite;
+    private boolean isPlanned;
+    private String plannedDay;
 
     public MealEntity() {
     }
@@ -476,5 +478,21 @@ public class MealEntity {
 
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public boolean isPlanned() {
+        return isPlanned;
+    }
+
+    public void setPlanned(boolean planned) {
+        isPlanned = planned;
+    }
+
+    public String getPlannedDay() {
+        return plannedDay;
+    }
+
+    public void setPlannedDay(String plannedDay) {
+        this.plannedDay = plannedDay;
     }
 }

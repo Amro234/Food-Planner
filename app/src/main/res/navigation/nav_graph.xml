@@ -3,42 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/home_id">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.logic_mvp.presentation.Home.HomeFragment"
+        android:id="@+id/home_id"
+        android:name="com.example.app.presentation.home.view.HomeFragment"
         android:label="YumPlan"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_to_mealList"
-            app:destination="@id/mealListFragment" />
+            app:destination="@id/categoryFragment" />
         <action
             android:id="@+id/action_home_to_mealDetails"
+            app:destination="@id/mealDetailsFragment" />
+        <action
+            android:id="@+id/action_home_to_search"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fav_id"
+        android:name="com.example.app.presentation.favorites.view.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_fav">
+        <action
+            android:id="@+id/action_fav_to_details"
             app:destination="@id/mealDetailsFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/mealListFragment"
-        android:name="com.example.logic_mvp.presentation.meal.MealListFragment"
+        android:id="@+id/plan_id"
+        android:name="com.example.app.presentation.plan.view.PlanFragment"
+        android:label="Meal Plan"
+        tools:layout="@layout/fragment_plan">
+        <action
+            android:id="@+id/action_plan_to_details"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.app.presentation.category.view.CategoryFragment"
         android:label="Meals"
         tools:layout="@layout/fragment_mealitem">
         <argument
             android:name="category"
             app:argType="string" />
         <action
-            android:id="@+id/action_mealList_to_details"
+            android:id="@+id/action_category_to_details"
             app:destination="@id/mealDetailsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/mealDetailsFragment"
-        android:name="com.example.logic_mvp.presentation.details.MealDetailsFragment"
+        android:name="com.example.app.presentation.mealdetails.view.MealDetailsFragment"
         android:label="Recipe Details"
         tools:layout="@layout/fragment_mealdetails">
         <argument
             android:name="mealId"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.app.presentation.search.view.SearchFragment"
+        android:label="Search Meals"
+        tools:layout="@layout/fragment_searched_meal">
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="area"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_search_to_details"
+            app:destination="@id/mealDetailsFragment" />
     </fragment>
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.logic_mvp.Database;
+package com.example.app.Database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.app.Database.MealEntity;
 
 import java.util.List;
 
@@ -18,6 +20,9 @@ public interface MealDAO {
 
     @Query("SELECT * FROM meals WHERE isFavorite = 1")
     Flowable<List<MealEntity>> getAllFavoriteMeals();
+
+    @Query("SELECT * FROM meals WHERE isPlanned = 1")
+    Flowable<List<MealEntity>> getPlannedMeals();
 
     @Query("SELECT * FROM meals WHERE idMeal = :mealId")
     Single<MealEntity> getMealById(String mealId);
@@ -42,4 +47,7 @@ public interface MealDAO {
 
     @Query("UPDATE meals SET isFavorite = :isFavorite WHERE idMeal = :mealId")
     Completable updateFavoriteStatus(String mealId, boolean isFavorite);
+
+    @Query("UPDATE meals SET isPlanned = :isPlanned, plannedDay = :day WHERE idMeal = :mealId")
+    Completable updatePlannedStatus(String mealId, boolean isPlanned, String day);
 }

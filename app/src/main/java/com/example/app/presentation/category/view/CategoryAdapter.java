@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.logic_mvp.databinding.ItemCategoryBinding;
-import com.example.logic_mvp.data.model.Category;
+import com.example.app.databinding.ItemCategoryBinding;
+import com.example.app.data.model.Category;
 
 import java.util.List;
 

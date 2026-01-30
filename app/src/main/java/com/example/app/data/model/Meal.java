@@ -1,4 +1,4 @@
-package com.example.logic_mvp.data.model;
+package com.example.app.data.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;

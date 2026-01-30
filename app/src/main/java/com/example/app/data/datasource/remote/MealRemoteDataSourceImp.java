@@ -1,8 +1,8 @@
-package com.example.logic_mvp.data.datasource.remote;
+package com.example.app.data.datasource.remote;
 
-import com.example.logic_mvp.Network.api.RetrofitClient;
-import com.example.logic_mvp.data.model.CategoryResponse;
-import com.example.logic_mvp.data.model.MealResponse;
+import com.example.app.Network.RetrofitClient;
+import com.example.app.data.model.CategoryResponse;
+import com.example.app.data.model.MealResponse;
 
 import io.reactivex.rxjava3.core.Single;
 
@@ -32,5 +32,15 @@ public class MealRemoteDataSourceImp implements MealRemoteDataSource {
     @Override
     public Single<MealResponse> getMealById(String mealId) {
         return mealApi.getMealById(mealId);
+    }
+
+    @Override
+    public Single<com.example.app.data.model.AreaResponse> getAreas() {
+        return mealApi.getAreas();
+    }
+
+    @Override
+    public Single<MealResponse> searchMeals(String query) {
+        return mealApi.searchMeals(query);
     }
 }

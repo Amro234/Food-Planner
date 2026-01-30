@@ -1,10 +1,13 @@
-package com.example.logic_mvp.Database;
+package com.example.app.Database;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.example.app.Database.MealDAO;
+import com.example.app.Database.MealEntity;
 
 @Database(entities = { MealEntity.class }, version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
