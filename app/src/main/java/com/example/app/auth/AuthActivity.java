@@ -9,8 +9,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.app.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AuthActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,4 +40,6 @@ public class AuthActivity extends AppCompatActivity {
         androidx.viewpager2.widget.ViewPager2 viewPager = findViewById(R.id.viewPager);
         viewPager.setCurrentItem(1, true);
     }
+
+
 }

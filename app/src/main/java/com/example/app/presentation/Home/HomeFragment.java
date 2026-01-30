@@ -17,8 +17,8 @@ import com.example.logic_mvp.R;
 import com.example.logic_mvp.databinding.FragmentHomeBinding;
 import com.example.logic_mvp.data.model.Category;
 import com.example.logic_mvp.data.model.Meal;
-import com.example.logic_mvp.presentation.Home.adapter.CategoryAdapter;
-import com.example.logic_mvp.presentation.Home.presenter.HomePresenter;
+import com.example.app.presentation.category.view.CategoryAdapter;
+import com.example.app.presentation.category.presenter.categoryPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements HomeContract.View {
 
     private FragmentHomeBinding binding;
-    private HomePresenter presenter;
+    private categoryPresenter presenter;
     private CategoryAdapter categoryAdapter;
     private Meal currentRandomMeal;
 
@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new HomePresenter(this, requireContext());
+        presenter = new categoryPresenter(this, requireContext());
         setupRecyclerView();
         presenter.loadRandomMeal();
         presenter.loadCategories();

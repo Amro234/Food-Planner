@@ -1,18 +1,16 @@
- package com.example.logic_mvp.presentation.Home.presenter;
+ package com.example.app.presentation.category.presenter;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.logic_mvp.R;
 import com.example.logic_mvp.databinding.ActivityHomeappBinding;
 
-public class Home extends AppCompatActivity {
+public class category extends AppCompatActivity {
 
     private ActivityHomeappBinding binding;
     private NavController navController;
