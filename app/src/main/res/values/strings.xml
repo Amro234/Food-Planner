@@ -66,6 +66,8 @@
     <string name="ing_info"> • San Marzano Tomatoes\n• Mozzarella\n• Fresh Basil\n• Fresh Dough </string>
     >
     <string name="sub_desc">Italian • Pizza</string>
+    <string name="Area">Area</string>
+    <string name="delm">|</string>
     <string name="Steps">📝 Cooking Steps</string>
     <string name="record">🎥 Cooking Tutorial</string>
     <string name="Description">1. Prepare the dough\n2. Add sauce and cheese\n3. Bake at high temperature</string>
@@ -78,9 +80,29 @@
     <string name="plan">Plan</string>
     <string name="logout">Logout</string>
 
+
+    <!--    Search Bar and Country Dropdown      -->
+
     <string name="country_flag">country_flag</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="country_name">country_name</string>
+    <string name="search_ic">Search_ic</string>
+
+    <!--    Item Ingredient     -->
+
+    <string name="ing_title">ing_title</string>
+    <string name="ing_mes">ing_mes</string>
+
+    <!--    Favourites    -->
+
+    <string name="Fav_title">My Favourites</string>
+    <string name="item_mealFav">No favorite meals yet.</string>
+
+    <!--   Planned -->
+
+    <string name="Plan_title">Weekly Plan</string>
+    <string name="item_meal_planned">No meals planned yet.</string>
+
+
 
 
 </resources>

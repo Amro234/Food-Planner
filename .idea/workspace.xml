@@ -60,6 +60,11 @@
           <theme>@style/Theme.App</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/trash_ic.xml">
+        <config>
+          <theme>@style/Theme.App</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/font/fonts.xml">
         <config>
           <theme>@style/Theme.App</theme>
@@ -71,11 +76,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_auth.xml">
-        <config>
-          <theme>@style/Theme.App</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_homeapp.xml">
         <config>
           <theme>@style/Theme.App</theme>
         </config>
@@ -140,7 +140,17 @@
           <theme>@style/Theme.App</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_ingredient.xml">
+        <config>
+          <theme>@style/Theme.App</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_meal.xml">
+        <config>
+          <theme>@style/Theme.App</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_meal_fav.xml">
         <config>
           <theme>@style/Theme.App</theme>
         </config>
@@ -172,66 +182,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd34591-6ca7-45a9-9678-a3e287b1fb72" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/Adapters/OnBoardingAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/Database/AppDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/Database/AppDataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/Database/MealDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/Database/MealDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/Database/MealEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/Database/MealEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/FavFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/Helper/SaveState.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/Helper/SaveState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/Network/RetrofitClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/Network/RetrofitClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/auth/AuthActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/auth/AuthActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/auth/AuthPagerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/auth/AuthPagerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/auth/login/LoginFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/auth/signup/SignupFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/local/MealLocalDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/local/MealLocalDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/local/MealLocalDataSourceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/local/MealLocalDataSourceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/remote/MealApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/remote/MealApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/remote/MealRemoteDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/remote/MealRemoteDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/remote/MealRemoteDataSourceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/datasource/remote/MealRemoteDataSourceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/CategoryResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/CategoryResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/Meal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/Meal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/MealResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/model/MealResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/repository/MealRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/repository/MealRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/repository/MealRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/data/repository/MealRepositoryImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/mealdetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/mealitem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/on_boarding.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/planFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/Home/HomeContract.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/Home/HomeFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/category/presenter/category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/category/presenter/categoryPresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/category/view/CategoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/app/presentation/category/view/CategoryAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/app/splashscreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/Google.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/event_available_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/facebook.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/favorite_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/hotel_class_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/login_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/icons/logout_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_homeapp.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fav.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fav.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mealdetails.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mealdetails.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_plan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_plan.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_country_dropdown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_country_dropdown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_meal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_meal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -242,7 +201,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=RKCW700558N)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\DELL\.android\avd\Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -305,9 +264,9 @@
       <list>
         <option value="resourceFile" />
         <option value="valueResourceFile" />
-        <option value="layoutResourceFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -340,7 +299,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "Logic",
+    "git-widget-placeholder": "UI",
     "last_directory_selection": "G:/WORK/ITI/Mobile App Development Deploma/Courses/AUJ/Project/Program/app/src/main/res/values",
     "last_opened_file_path": "G:/WORK/ITI/Mobile App Development Deploma/Courses/AUJ/Project/Program/app/src/main/res/drawable",
     "project.structure.last.edited": "Project",
@@ -481,12 +440,12 @@
       <map>
         <entry key="com.example.app">
           <value>
-            <CheckInfo lastCheckTimestamp="1769702426058" />
+            <CheckInfo lastCheckTimestamp="1769788830503" />
           </value>
         </entry>
         <entry key="com.example.app.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1769702426057" />
+            <CheckInfo lastCheckTimestamp="1769788830507" />
           </value>
         </entry>
       </map>
