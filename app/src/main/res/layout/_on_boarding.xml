@@ -7,16 +7,23 @@
     android:fitsSystemWindows="false"
     tools:context=".on_boarding">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
     <Button
         android:id="@+id/button"
         android:layout_width="90dp"
         android:layout_height="45dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="12dp"
+        android:layout_margin="24dp"
         android:text="@string/skip"
         android:textColor="@color/orange4"
-        android:backgroundTint="@color/blue7"/>
+        android:backgroundTint="@color/blue7"
+        android:elevation="10dp"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/next_card"
@@ -30,7 +37,8 @@
         android:backgroundTint="@color/blue7"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/selectableItemBackground">
+        android:foreground="?attr/selectableItemBackground"
+        android:elevation="10dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -39,12 +47,6 @@
             android:src="@drawable/right_arrow_24"
             />
     </androidx.cardview.widget.CardView>
-    
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/slider"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
 
     <LinearLayout
         android:id="@+id/dotsLayout"
