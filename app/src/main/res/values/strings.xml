@@ -15,6 +15,7 @@
     <string name="title3"> Have Fun ! </string>
     <string name="desc_title3"> enjoy the app made me happy </string>
     <string name="skip"> SKIP </string>
+    <string name="Title"> HI, Ready to explore some Meals </string>
 
 
     <!--    Fragment Login  -->
@@ -23,6 +24,7 @@
     <string name="welcome_login">Welcome Back !</string>
     <string name="subtitle_login">Healthy eating starts here .</string>
     <string name="email_title">Email</string>
+    <string name="email_prof">Email : </string>
     <string name="email">Enter your email</string>
     <string name="password_title">Password</string>
     <string name="password">Enter your password</string>
@@ -38,6 +40,7 @@
     <string name="newAccount">Create Account</string>
     <string name="subNewAccount">Join us to start planning your healthy meals today.</string>
     <string name="username">UserName</string>
+    <string name="username_prof">UserName : </string>
     <string name="Username_entry">Enter your username</string>
     <string name="By_signing">By Signing up you agree to our</string>
     <string name="terms">Terms of Service</string>
@@ -75,7 +78,9 @@
 
     <!-- Bottom Nav Names  -->
 
+    <string name="profile">Profile</string>
     <string name="Home">Home</string>
+    <string name="search_Nav_title">search</string>
     <string name="Fav">Favourite</string>
     <string name="plan">Plan</string>
     <string name="logout">Logout</string>
@@ -102,7 +107,11 @@
     <string name="Plan_title">Weekly Plan</string>
     <string name="item_meal_planned">No meals planned yet.</string>
 
-
-
+    <!-- Chip Group -->
+    <string name="text_filter_1">Category</string>
+    <string name="text_filter_2">Ingredient</string>
+    <string name="text_filter_3">Country</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
