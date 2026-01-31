@@ -22,8 +22,8 @@ public class MealLocalDataSourceImp implements MealLocalDataSource {
     }
 
     @Override
-    public Flowable<List<MealEntity>> getAllFavoriteMeals() {
-        return mealDAO.getAllFavoriteMeals();
+    public Flowable<List<MealEntity>> getAllFavoriteMeals(String userId) {
+        return mealDAO.getFavoriteMeals(userId);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class MealLocalDataSourceImp implements MealLocalDataSource {
     }
 
     @Override
-    public Flowable<List<MealEntity>> getPlannedMeals() {
-        return mealDAO.getPlannedMeals();
+    public Flowable<List<MealEntity>> getPlannedMeals(String userId) {
+        return mealDAO.getPlannedMeals(userId);
     }
 
     @Override

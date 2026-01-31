@@ -67,8 +67,17 @@ public class MealEntity {
     private boolean isFavorite;
     private boolean isPlanned;
     private String plannedDay;
+    private String userId;
 
     public MealEntity() {
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @NonNull

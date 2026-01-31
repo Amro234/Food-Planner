@@ -78,12 +78,18 @@ public class SignupFragment extends Fragment implements SignupContract.View {
         if (TextUtils.isEmpty(email)) {
             emailInputLayout.setError("Email is required");
             isValid = false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailInputLayout.setError("Enter a valid email address");
+            isValid = false;
         } else {
             emailInputLayout.setError(null);
         }
 
         if (TextUtils.isEmpty(password)) {
             passwordInputLayout.setError("Password is required");
+            isValid = false;
+        } else if (password.length() < 6) {
+            passwordInputLayout.setError("Password must be at least 6 characters");
             isValid = false;
         } else {
             passwordInputLayout.setError(null);

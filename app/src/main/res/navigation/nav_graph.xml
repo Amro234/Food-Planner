@@ -45,7 +45,18 @@
         android:id="@+id/prof_id"
         android:name="com.example.app.presentation.person.view.person"
         android:label="Profile"
-        tools:layout="@layout/fragment_person" />
+        tools:layout="@layout/fragment_person">
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         android:id="@+id/categoryFragment"

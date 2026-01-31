@@ -41,4 +41,6 @@ public interface MealRepository {
     Completable addToPlan(Meal meal, String day);
 
     Completable removeFromPlan(String mealId);
+
+    Completable syncFromFirestore();
 }

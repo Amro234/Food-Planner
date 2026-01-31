@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Single;
 
 public interface MealLocalDataSource {
 
-    Flowable<List<MealEntity>> getAllFavoriteMeals();
+    Flowable<List<MealEntity>> getAllFavoriteMeals(String userId);
 
     Single<MealEntity> getMealById(String mealId);
 
@@ -23,7 +23,7 @@ public interface MealLocalDataSource {
 
     Completable deleteMealById(String mealId);
 
-    Flowable<List<MealEntity>> getPlannedMeals();
+    Flowable<List<MealEntity>> getPlannedMeals(String userId);
 
     Completable updateFavoriteStatus(String mealId, boolean isFavorite);
 

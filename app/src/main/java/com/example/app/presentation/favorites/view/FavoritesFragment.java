@@ -15,6 +15,9 @@ import com.example.app.Database.MealEntity;
 import com.example.app.databinding.FragmentFavBinding;
 import com.example.app.presentation.favorites.presenter.FavoritesContract;
 import com.example.app.presentation.favorites.presenter.FavoritesPresenter;
+import com.example.app.data.repository.UserRepositoryImp;
+import androidx.navigation.Navigation;
+import com.example.app.presentation.favorites.view.FavoritesFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +44,23 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
 
         presenter = new FavoritesPresenter(this, requireContext());
         setupRecyclerView();
-        presenter.getFavoriteMeals();
+
+        if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+            binding.favRecyclerView.setVisibility(View.GONE);
+            binding.emptyStateText.setVisibility(View.VISIBLE);
+            binding.emptyStateText.setText("You must sign-in to see your Favorites!");
+        } else {
+            presenter.getFavoriteMeals();
+        }
     }
 
     private void setupRecyclerView() {
         adapter = new FavoritesAdapter(new ArrayList<>(), new FavoritesAdapter.OnFavoriteClickListener() {
             @Override
             public void onMealClick(MealEntity meal) {
-                // Navigate to details
+                FavoritesFragmentDirections.ActionFavToDetails action = FavoritesFragmentDirections
+                        .actionFavToDetails(meal.getIdMeal());
+                Navigation.findNavController(requireView()).navigate(action);
             }
 
             @Override
@@ -63,6 +75,8 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
 
     @Override
     public void showFavoriteMeals(List<MealEntity> meals) {
+        binding.favRecyclerView.setVisibility(View.VISIBLE);
+        binding.emptyStateText.setVisibility(View.GONE);
         adapter.updateMeals(meals);
     }
 

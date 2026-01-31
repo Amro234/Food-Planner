@@ -21,6 +21,7 @@ import com.example.app.presentation.home.presenter.HomeContract;
 import com.example.app.presentation.home.presenter.HomePresenter;
 import com.example.app.presentation.category.view.CategoryAdapter;
 import com.example.app.presentation.category.view.MealListAdapter;
+import com.example.app.data.repository.UserRepositoryImp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,11 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
             @Override
             public void onAddToFavorite(Meal meal) {
-
+                if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                    Toast.makeText(requireContext(), "Sign-in to add favorites!", Toast.LENGTH_SHORT).show();
+                } else {
+                    presenter.addToFavorites(meal);
+                }
             }
         }, true);
         binding.recyclerView
@@ -120,6 +125,13 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Override
     public void hideLoading() {
         // TODO: Add progress bar to layout and hide it here
+    }
+
+    @Override
+    public void showMessage(String message) {
+        if (getContext() != null) {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

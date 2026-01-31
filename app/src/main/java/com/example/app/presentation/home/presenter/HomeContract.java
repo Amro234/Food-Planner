@@ -18,6 +18,8 @@ public interface HomeContract {
 
         void hideLoading();
 
+        void showMessage(String message);
+
         void showError(String message);
     }
 
@@ -29,6 +31,8 @@ public interface HomeContract {
         void loadRecommendedMeals();
 
         void onCategoryClicked(String categoryName);
+
+        void addToFavorites(com.example.app.data.model.Meal meal);
 
         void onDestroy();
     }
