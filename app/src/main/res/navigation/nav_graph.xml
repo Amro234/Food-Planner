@@ -18,7 +18,7 @@
             app:destination="@id/mealDetailsFragment" />
         <action
             android:id="@+id/action_home_to_search"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/search_id" />
     </fragment>
 
     <fragment
@@ -40,6 +40,12 @@
             android:id="@+id/action_plan_to_details"
             app:destination="@id/mealDetailsFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/prof_id"
+        android:name="com.example.app.presentation.person.view.person"
+        android:label="Profile"
+        tools:layout="@layout/fragment_person" />
 
     <fragment
         android:id="@+id/categoryFragment"
@@ -65,10 +71,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/search_id"
         android:name="com.example.app.presentation.search.view.SearchFragment"
         android:label="Search Meals"
-        tools:layout="@layout/fragment_searched_meal">
+        tools:layout="@layout/search_view">
         <argument
             android:name="query"
             app:argType="string"

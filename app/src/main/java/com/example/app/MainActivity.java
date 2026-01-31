@@ -24,21 +24,6 @@ public class MainActivity extends AppCompatActivity {
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
             NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
-
-            binding.bottomNavigation.setOnItemSelectedListener(item -> {
-                if (item.getItemId() == R.id.logout_id) {
-                    // Handle Logout
-                    com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
-                    new com.example.app.Helper.SaveState(this, "on_boarding").setGuest(false);
-                    android.content.Intent intent = new android.content.Intent(this,
-                            com.example.app.auth.AuthActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return true;
-                }
-                return NavigationUI.onNavDestinationSelected(item, navController)
-                        || super.onOptionsItemSelected(item);
-            });
         }
     }
 }

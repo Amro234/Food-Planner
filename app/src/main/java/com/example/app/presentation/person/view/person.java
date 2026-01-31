@@ -59,8 +59,19 @@ public class person extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_person, container, false);
+        View view = inflater.inflate(R.layout.fragment_person, container, false);
+
+        view.findViewById(R.id.Logout_id).setOnClickListener(v -> {
+            com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
+            new com.example.app.Helper.SaveState(requireContext(), "on_boarding").setGuest(false);
+            android.content.Intent intent = new android.content.Intent(requireActivity(),
+                    com.example.app.auth.AuthActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
+
+        return view;
     }
 }
