@@ -8,13 +8,6 @@
     android:background="@color/white"
     tools:context=".presentation.search.view.SearchFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/searchToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
-        app:navigationIcon="@drawable/ic_menu_search"
-        app:title="Search Results" />
 
     <FrameLayout
         android:layout_width="match_parent"

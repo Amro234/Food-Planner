@@ -8,6 +8,12 @@
         />
 
     <item
+        android:id="@+id/search_id"
+        android:title="@string/search_Nav_title"
+        android:icon="@drawable/ic_menu_search"
+        />
+
+    <item
         android:id="@+id/fav_id"
         android:title="@string/Fav"
         android:icon="@drawable/fav_ic"
@@ -19,8 +25,11 @@
         android:icon="@drawable/plan_ic"
 
         />
+
     <item
-        android:id="@+id/logout_id"
-        android:title="@string/logout"
-        android:icon="@drawable/logout_ic"/>
+        android:id="@+id/prof_id"
+        android:title="@string/profile"
+        android:icon="@drawable/person_ic"
+        />
+
 </menu>
