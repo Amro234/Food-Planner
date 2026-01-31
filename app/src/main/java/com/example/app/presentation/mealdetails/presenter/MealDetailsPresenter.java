@@ -8,6 +8,8 @@ import com.example.app.data.repository.MealRepository;
 import com.example.app.data.repository.MealRepositoryImp;
 
 import com.example.app.data.model.Ingredient;
+import com.example.app.data.repository.UserRepositoryImp;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,13 +77,25 @@ public class MealDetailsPresenter implements MealDetailsContract.Presenter {
 
     @Override
     public void addToFavorites(Meal meal) {
+        if (!UserRepositoryImp.getInstance(null).isUserLoggedIn()) {
+            view.showError("Must be Signed-in to add favorites!");
+            return;
+        }
+
+        view.showLoading();
         disposables.add(
                 repository.addToFavorites(meal)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                () -> view.showSuccessMessage("Added to favorites"),
-                                throwable -> view.showError(throwable.getMessage())));
+                                () -> {
+                                    view.hideLoading();
+                                    view.showSuccessMessage("Added to favorites & Synced!");
+                                },
+                                throwable -> {
+                                    view.hideLoading();
+                                    view.showError(throwable.getMessage());
+                                }));
     }
 
     @Override

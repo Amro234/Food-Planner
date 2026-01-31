@@ -24,6 +24,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.app.data.repository.UserRepositoryImp;
 
 public class MealDetailsFragment extends Fragment implements MealDetailsContract.View {
 
@@ -81,7 +82,13 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
                 .load(meal.getStrMealThumb())
                 .into(binding.mealImage);
 
-        binding.addToFavButton.setOnClickListener(v -> presenter.addToFavorites(meal));
+        binding.addToFavButton.setOnClickListener(v -> {
+            if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                Toast.makeText(requireContext(), "Sign-in to add favorites!", Toast.LENGTH_SHORT).show();
+            } else {
+                presenter.addToFavorites(meal);
+            }
+        });
 
         if (meal.getStrYoutube() != null && !meal.getStrYoutube().isEmpty()) {
             String videoId = extractVideoId(meal.getStrYoutube());

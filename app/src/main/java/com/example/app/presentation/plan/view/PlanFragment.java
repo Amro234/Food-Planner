@@ -15,6 +15,9 @@ import com.example.app.Database.MealEntity;
 import com.example.app.databinding.FragmentPlanBinding;
 import com.example.app.presentation.plan.presenter.PlanContract;
 import com.example.app.presentation.plan.presenter.PlanPresenter;
+import com.example.app.data.repository.UserRepositoryImp;
+import androidx.navigation.Navigation;
+import com.example.app.presentation.plan.view.PlanFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +42,23 @@ public class PlanFragment extends Fragment implements PlanContract.View {
 
         presenter = new PlanPresenter(this, requireContext());
         setupRecyclerView();
-        presenter.getPlannedMeals();
+
+        if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+            binding.planRecyclerView.setVisibility(View.GONE);
+            binding.emptyPlanText.setVisibility(View.VISIBLE);
+            binding.emptyPlanText.setText("You must sign-in to see your Plan!");
+        } else {
+            presenter.getPlannedMeals();
+        }
     }
 
     private void setupRecyclerView() {
         adapter = new PlanAdapter(new ArrayList<>(), new PlanAdapter.OnPlanClickListener() {
             @Override
             public void onMealClick(MealEntity meal) {
-                // Navigate to details
+                PlanFragmentDirections.ActionPlanToDetails action = PlanFragmentDirections
+                        .actionPlanToDetails(meal.getIdMeal());
+                Navigation.findNavController(requireView()).navigate(action);
             }
 
             @Override

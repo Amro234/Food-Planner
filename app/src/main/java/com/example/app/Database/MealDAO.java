@@ -18,11 +18,14 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface MealDAO {
 
-    @Query("SELECT * FROM meals WHERE isFavorite = 1")
-    Flowable<List<MealEntity>> getAllFavoriteMeals();
+    @Query("SELECT * FROM meals WHERE isFavorite = 1 AND userId = :userId")
+    Flowable<List<MealEntity>> getFavoriteMeals(String userId);
 
-    @Query("SELECT * FROM meals WHERE isPlanned = 1")
-    Flowable<List<MealEntity>> getPlannedMeals();
+    @Query("SELECT * FROM meals WHERE isPlanned = 1 AND userId = :userId")
+    Flowable<List<MealEntity>> getPlannedMeals(String userId);
+
+    @Query("SELECT * FROM meals WHERE isPlanned = 1 AND plannedDay = :day AND userId = :userId")
+    Flowable<List<MealEntity>> getPlannedMealsByDay(String day, String userId);
 
     @Query("SELECT * FROM meals WHERE idMeal = :mealId")
     Single<MealEntity> getMealById(String mealId);

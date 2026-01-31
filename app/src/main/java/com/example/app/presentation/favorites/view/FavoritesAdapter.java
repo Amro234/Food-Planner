@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.app.databinding.ItemMealBinding;
+import com.example.app.databinding.ItemMealFavBinding;
 import com.example.app.Database.MealEntity;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     @NonNull
     @Override
     public FavoriteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMealBinding binding = ItemMealBinding.inflate(
+        ItemMealFavBinding binding = ItemMealFavBinding.inflate(
                 LayoutInflater.from(parent.getContext()), parent, false);
         return new FavoriteViewHolder(binding);
     }
@@ -52,9 +52,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     }
 
     class FavoriteViewHolder extends RecyclerView.ViewHolder {
-        private final ItemMealBinding binding;
+        private final ItemMealFavBinding binding;
 
-        FavoriteViewHolder(ItemMealBinding binding) {
+        FavoriteViewHolder(ItemMealFavBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -65,10 +65,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                     .load(meal.getStrMealThumb())
                     .into(binding.mealImage);
 
+            // Set heart icon to filled/active state since it's in favorites
+            // (Assuming LoveId is the MaterialCardView and heart_ic is inside or handled
+            // via tint)
+            // For now, focusing on the click action
+            binding.LoveId.setOnClickListener(v -> listener.onRemoveClick(meal));
             binding.getRoot().setOnClickListener(v -> listener.onMealClick(meal));
-            // Assuming there's a delete icon or similar in ItemMealBinding or handling it
-            // via long press
-            // For now, simple click
         }
     }
 }

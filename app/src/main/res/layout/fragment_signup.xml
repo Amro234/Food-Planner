@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.signup.SignupFragment">
+    tools:context=".auth.signup.view.SignupFragment">
 
     <TextView
         android:id="@+id/sign_in_title"
@@ -223,12 +223,13 @@
 
     <Button
         android:id="@+id/sign_in_btn"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/orange6"
         android:fontFamily="@font/redhattext_semibold"
         android:text="@string/newAccount"
+        android:textColor="@color/white"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -236,6 +237,7 @@
         app:layout_constraintTop_toBottomOf="@+id/texttt"
         app:icon="@drawable/outline_arrow_forward_24"
         app:iconGravity="end"
+        app:iconTint="@color/white"
         />
 
     <LinearLayout

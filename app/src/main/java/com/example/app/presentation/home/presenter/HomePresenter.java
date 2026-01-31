@@ -52,6 +52,17 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
+    public void addToFavorites(com.example.app.data.model.Meal meal) {
+        disposables.add(
+                repository.addToFavorites(meal)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                () -> view.showMessage("Added to favorites"),
+                                this::handleError));
+    }
+
+    @Override
     public void loadRecommendedMeals() {
         disposables.add(
                 repository.getMealsByCategory("Beef") // Default recommendation for now

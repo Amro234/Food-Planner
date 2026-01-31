@@ -10,10 +10,14 @@ import com.example.app.data.datasource.remote.MealRemoteDataSourceImp;
 import com.example.app.data.model.CategoryResponse;
 import com.example.app.data.model.Meal;
 import com.example.app.data.model.MealResponse;
+import com.example.app.data.repository.UserRepository;
+import com.example.app.data.repository.UserRepositoryImp;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableEmitter;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
@@ -22,10 +26,14 @@ public class MealRepositoryImp implements MealRepository {
     private static MealRepositoryImp instance = null;
     private final MealRemoteDataSource remoteDataSource;
     private final MealLocalDataSource localDataSource;
+    private final UserRepository userRepository;
+    private final FirebaseFirestore firestore;
 
     private MealRepositoryImp(Context context) {
         this.remoteDataSource = new MealRemoteDataSourceImp();
         this.localDataSource = new MealLocalDataSourceImp(context);
+        this.userRepository = UserRepositoryImp.getInstance(context);
+        this.firestore = FirebaseFirestore.getInstance();
     }
 
     public static MealRepositoryImp getInstance(Context context) {
@@ -82,37 +90,116 @@ public class MealRepositoryImp implements MealRepository {
 
     @Override
     public Flowable<List<MealEntity>> getFavoriteMeals() {
-        return localDataSource.getAllFavoriteMeals();
+        String userId = userRepository.getCurrentUserId();
+        return localDataSource.getAllFavoriteMeals(userId != null ? userId : "guest");
     }
 
     @Override
     public Completable addToFavorites(Meal meal) {
         MealEntity entity = convertMealToEntity(meal);
         entity.setFavorite(true);
-        return localDataSource.insertMeal(entity);
+        String userId = userRepository.getCurrentUserId();
+        entity.setUserId(userId != null ? userId : "guest");
+
+        return localDataSource.insertMeal(entity)
+                .andThen(Completable.create(emitter -> {
+                    if (userRepository.isUserLoggedIn()) {
+                        uploadToFirestore(entity, "favorites", emitter);
+                    } else {
+                        emitter.onComplete();
+                    }
+                }));
     }
 
     @Override
     public Completable removeFromFavorites(String mealId) {
-        return localDataSource.updateFavoriteStatus(mealId, false);
+        return localDataSource.updateFavoriteStatus(mealId, false)
+                .andThen(Completable.create(emitter -> {
+                    if (userRepository.isUserLoggedIn()) {
+                        removeFromFirestore(mealId, "favorites", emitter);
+                    } else {
+                        emitter.onComplete();
+                    }
+                }));
     }
 
     @Override
     public Flowable<List<MealEntity>> getPlannedMeals() {
-        return localDataSource.getPlannedMeals();
+        String userId = userRepository.getCurrentUserId();
+        return localDataSource.getPlannedMeals(userId != null ? userId : "guest");
     }
 
     @Override
     public Completable addToPlan(Meal meal, String day) {
-        MealEntity entity = MealMapper.toEntity(meal);
+        MealEntity entity = convertMealToEntity(meal);
         entity.setPlanned(true);
         entity.setPlannedDay(day);
-        return localDataSource.insertMeal(entity);
+        String userId = userRepository.getCurrentUserId();
+        entity.setUserId(userId != null ? userId : "guest");
+
+        return localDataSource.insertMeal(entity)
+                .andThen(Completable.create(emitter -> {
+                    if (userRepository.isUserLoggedIn()) {
+                        uploadToFirestore(entity, "planned", emitter);
+                    } else {
+                        emitter.onComplete();
+                    }
+                }));
     }
 
     @Override
     public Completable removeFromPlan(String mealId) {
-        return localDataSource.updatePlannedStatus(mealId, false, null);
+        return localDataSource.updatePlannedStatus(mealId, false, null)
+                .andThen(Completable.create(emitter -> {
+                    if (userRepository.isUserLoggedIn()) {
+                        removeFromFirestore(mealId, "planned", emitter);
+                    } else {
+                        emitter.onComplete();
+                    }
+                }));
+    }
+
+    // FireStore sync method
+    private void uploadToFirestore(MealEntity entity, String collection, CompletableEmitter emitter) {
+        String userId = userRepository.getCurrentUserId();
+        firestore.collection("users").document(userId)
+                .collection(collection).document(entity.getIdMeal())
+                .set(entity)
+                .addOnSuccessListener(aVoid -> emitter.onComplete())
+                .addOnFailureListener(emitter::onError);
+    }
+
+    private void removeFromFirestore(String mealId, String collection, CompletableEmitter emitter) {
+        String userId = userRepository.getCurrentUserId();
+        firestore.collection("users").document(userId)
+                .collection(collection).document(mealId)
+                .delete()
+                .addOnSuccessListener(aVoid -> emitter.onComplete())
+                .addOnFailureListener(emitter::onError);
+    }
+
+    // FireStore sync back user (Favourite meals) data if user open from another
+    // device
+    @Override
+    public Completable syncFromFirestore() {
+        String userId = userRepository.getCurrentUserId();
+        if (userId == null)
+            return Completable.complete();
+
+        return Completable.create(emitter -> {
+            firestore.collection("users").document(userId).collection("favorites")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        List<MealEntity> favorites = queryDocumentSnapshots.toObjects(MealEntity.class);
+                        for (MealEntity meal : favorites) {
+                            meal.setUserId(userId);
+                            meal.setFavorite(true);
+                        }
+                        localDataSource.insertMeals(favorites)
+                                .subscribe(emitter::onComplete, emitter::onError);
+                    })
+                    .addOnFailureListener(emitter::onError);
+        });
     }
 
     private MealEntity convertMealToEntity(Meal meal) {
