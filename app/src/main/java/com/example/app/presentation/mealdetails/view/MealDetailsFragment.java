@@ -19,6 +19,8 @@ import com.example.app.data.model.Meal;
 import com.example.app.presentation.mealdetails.presenter.MealDetailsContract;
 import com.example.app.presentation.mealdetails.presenter.MealDetailsPresenter;
 import com.example.app.presentation.ingerdient.view.IngredientsAdapter;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +82,28 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
                 .into(binding.mealImage);
 
         binding.addToFavButton.setOnClickListener(v -> presenter.addToFavorites(meal));
+
+        if (meal.getStrYoutube() != null && !meal.getStrYoutube().isEmpty()) {
+            String videoId = extractVideoId(meal.getStrYoutube());
+
+            getLifecycle().addObserver(binding.youtubePlayerView);
+
+            binding.youtubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(@NonNull YouTubePlayer youtubePlayer) {
+                    youtubePlayer.cueVideo(videoId, 0);
+                }
+            });
+        } else {
+            binding.youtubePlayerView.setVisibility(View.GONE);
+        }
+    }
+
+    private String extractVideoId(String youtubeUrl) {
+        if (youtubeUrl != null && youtubeUrl.contains("v=")) {
+            return youtubeUrl.split("v=")[1].split("&")[0];
+        }
+        return "";
     }
 
     @Override
