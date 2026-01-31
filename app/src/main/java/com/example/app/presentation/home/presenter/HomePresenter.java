@@ -67,49 +67,6 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
-    public void loadAreas() {
-        disposables.add(
-                repository.getAreas()
-                        .subscribeOn(Schedulers.io())
-                        .map(response -> {
-                            if (response != null && response.getAreas() != null) {
-                                java.util.List<com.example.app.data.model.Area> filtered = response.getAreas()
-                                        .stream()
-                                        .filter(area -> !area.getFlagUrl().contains("unknown"))
-                                        .collect(java.util.stream.Collectors.toList());
-                                response.setAreas(filtered);
-                            }
-                            return response;
-                        })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                response -> {
-                                    if (response != null && response.getAreas() != null) {
-                                        view.showAreas(response.getAreas());
-                                    }
-                                },
-                                this::handleError));
-    }
-
-    @Override
-    public void searchMeals(String query) {
-        disposables.add(
-                repository.searchMeals(query)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                response -> {
-                                    if (response != null && response.getMeals() != null) {
-                                        view.showSearchResults(response.getMeals());
-                                    } else {
-                                        // Handle empty results if needed, e.g. clear list
-                                        view.showSearchResults(new java.util.ArrayList<>());
-                                    }
-                                },
-                                this::handleError));
-    }
-
-    @Override
     public void onDestroy() {
         disposables.clear();
     }

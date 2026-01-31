@@ -16,6 +16,7 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MealVi
 
     private List<Meal> meals;
     private final OnMealClickListener listener;
+    private final boolean isHorizontal;
 
     public interface OnMealClickListener {
         void onMealClick(Meal meal);
@@ -24,8 +25,13 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MealVi
     }
 
     public MealListAdapter(List<Meal> meals, OnMealClickListener listener) {
+        this(meals, listener, false);
+    }
+
+    public MealListAdapter(List<Meal> meals, OnMealClickListener listener, boolean isHorizontal) {
         this.meals = meals;
         this.listener = listener;
+        this.isHorizontal = isHorizontal;
     }
 
     public void updateMeals(List<Meal> meals) {
@@ -39,8 +45,10 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MealVi
     @NonNull
     @Override
     public MealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMealBinding binding = ItemMealBinding.inflate(
-                LayoutInflater.from(parent.getContext()), parent, false);
+        int layoutId = isHorizontal ? com.example.app.R.layout.item_meal_horizontal
+                : com.example.app.R.layout.item_meal;
+        android.view.View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+        ItemMealBinding binding = ItemMealBinding.bind(view);
         return new MealViewHolder(binding);
     }
 
@@ -50,9 +58,9 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MealVi
     }
 
     @Override
-public int getItemCount() {
-    return meals == null ? 0 : meals.size();
-}
+    public int getItemCount() {
+        return meals == null ? 0 : meals.size();
+    }
 
     class MealViewHolder extends RecyclerView.ViewHolder {
         private final ItemMealBinding binding;

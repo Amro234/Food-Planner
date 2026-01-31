@@ -14,10 +14,6 @@ public interface HomeContract {
 
         void showRecommendedMeals(List<Meal> meals);
 
-        void showAreas(List<com.example.app.data.model.Area> areas);
-
-        void showSearchResults(List<Meal> meals);
-
         void showLoading();
 
         void hideLoading();
@@ -31,10 +27,6 @@ public interface HomeContract {
         void loadCategories();
 
         void loadRecommendedMeals();
-
-        void loadAreas();
-
-        void searchMeals(String query);
 
         void onCategoryClicked(String categoryName);
 

@@ -30,6 +30,16 @@ public class MealRemoteDataSourceImp implements MealRemoteDataSource {
     }
 
     @Override
+    public Single<MealResponse> getMealsByIngredient(String ingredient) {
+        return mealApi.getMealsByIngredient(ingredient);
+    }
+
+    @Override
+    public Single<MealResponse> getMealsByArea(String area) {
+        return mealApi.getMealsByArea(area);
+    }
+
+    @Override
     public Single<MealResponse> getMealById(String mealId) {
         return mealApi.getMealById(mealId);
     }
@@ -37,6 +47,11 @@ public class MealRemoteDataSourceImp implements MealRemoteDataSource {
     @Override
     public Single<com.example.app.data.model.AreaResponse> getAreas() {
         return mealApi.getAreas();
+    }
+
+    @Override
+    public Single<com.example.app.data.model.IngredientResponse> getIngredients() {
+        return mealApi.getIngredients();
     }
 
     @Override

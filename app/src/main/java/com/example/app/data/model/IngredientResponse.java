@@ -1,19 +1,15 @@
 package com.example.app.data.model;
 
+import java.util.List;
+
 public class IngredientResponse {
+    private List<Ingredient> meals;
 
-    private String ingredient;
-
-    public IngredientResponse(String ingredient) {
-        this.ingredient = ingredient;
+    public List<Ingredient> getIngredients() {
+        return meals;
     }
 
-    public String getIngredient() {
-        return ingredient;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.meals = ingredients;
     }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
 }

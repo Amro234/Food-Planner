@@ -21,17 +21,6 @@ import com.example.app.presentation.home.presenter.HomeContract;
 import com.example.app.presentation.home.presenter.HomePresenter;
 import com.example.app.presentation.category.view.CategoryAdapter;
 import com.example.app.presentation.category.view.MealListAdapter;
-import com.example.app.presentation.Area.view.CountrySpinnerAdapter;
-import android.widget.Spinner;
-import android.widget.AdapterView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
-import com.example.app.data.model.Area;
-import io.reactivex.rxjava3.subjects.PublishSubject;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,12 +31,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private CategoryAdapter categoryAdapter;
     private MealListAdapter recommendedAdapter;
     private Meal currentRandomMeal;
-    private CountrySpinnerAdapter countrySpinnerAdapter;
-    private Spinner countrySpinner;
-    private EditText searchEditText;
-    private final PublishSubject<String> searchSubject = PublishSubject.create();
-    private CompositeDisposable searchDisposable = new CompositeDisposable();
-    private String selectedArea = "Unknown";
 
     @Nullable
     @Override
@@ -61,17 +44,11 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        searchEditText = binding.searchEditText;
-        countrySpinner = binding.countrySpinner;
-
         presenter = new HomePresenter(this, requireContext());
         setupRecyclerView();
         presenter.loadRandomMeal();
         presenter.loadCategories();
         presenter.loadRecommendedMeals();
-        presenter.loadAreas();
-
-        setupSearch();
 
         binding.mealOfDayCard.setOnClickListener(v -> {
             if (currentRandomMeal != null) {
@@ -91,8 +68,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
         binding.categoriesRecyclerView.setLayoutManager(
                 new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.categoriesRecyclerView.setLayoutManager(
-                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.categoriesRecyclerView.setAdapter(categoryAdapter);
 
         recommendedAdapter = new MealListAdapter(new ArrayList<>(), new MealListAdapter.OnMealClickListener() {
@@ -107,53 +82,10 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             public void onAddToFavorite(Meal meal) {
 
             }
-        });
-        binding.recyclerView.setLayoutManager(new androidx.recyclerview.widget.GridLayoutManager(requireContext(), 2));
+        }, true);
+        binding.recyclerView
+                .setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.recyclerView.setAdapter(recommendedAdapter);
-    }
-
-    private void setupSearch() {
-        searchDisposable.add(
-                searchSubject
-                        .debounce(500, TimeUnit.MILLISECONDS)
-                        .distinctUntilChanged()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(query -> {
-                            if (!query.isEmpty()) {
-                                navigateToSearch(query);
-                            }
-                        }));
-
-        searchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchSubject.onNext(s.toString().trim());
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        binding.searchIconButton.setOnClickListener(v -> {
-            String query = searchEditText.getText().toString().trim();
-            navigateToSearch(query);
-        });
-    }
-
-    private void navigateToSearch(String query) {
-        if (query != null && !query.isEmpty()) {
-            HomeFragmentDirections.ActionHomeToSearch action = HomeFragmentDirections
-                    .actionHomeToSearch()
-                    .setQuery(query)
-                    .setArea(selectedArea);
-            Navigation.findNavController(binding.getRoot()).navigate(action);
-            searchEditText.setText("");
-        }
     }
 
     @Override
@@ -198,37 +130,11 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
     @Override
-    public void showAreas(List<Area> areas) {
-        countrySpinnerAdapter = new CountrySpinnerAdapter(requireContext(), areas);
-        countrySpinner.setAdapter(countrySpinnerAdapter);
-        countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Area area = areas.get(position);
-                selectedArea = area.getStrArea();
-                Toast.makeText(requireContext(), "Selected: " + selectedArea, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
-
-    @Override
-    public void showSearchResults(List<Meal> meals) {
-        if (recommendedAdapter != null) {
-            recommendedAdapter.updateMeals(meals);
-        }
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (presenter != null) {
             presenter.onDestroy();
         }
-        searchDisposable.clear();
         binding = null;
     }
 }

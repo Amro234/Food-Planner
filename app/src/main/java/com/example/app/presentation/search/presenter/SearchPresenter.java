@@ -1,6 +1,9 @@
 package com.example.app.presentation.search.presenter;
 
 import android.content.Context;
+import com.example.app.data.model.Area;
+import com.example.app.data.model.Category;
+import com.example.app.data.model.Ingredient;
 import com.example.app.data.model.Meal;
 import com.example.app.data.repository.MealRepository;
 import com.example.app.data.repository.MealRepositoryImp;
@@ -24,12 +27,11 @@ public class SearchPresenter implements SearchContract.Presenter {
     }
 
     @Override
-    public void searchMeals(String query, String area) {
+    public void searchMealsByName(String query) {
         if (query == null || query.trim().isEmpty()) {
             view.showEmptyState();
             return;
         }
-
         view.showLoading();
         disposables.add(
                 repository.searchMeals(query)
@@ -40,23 +42,152 @@ public class SearchPresenter implements SearchContract.Presenter {
                                     view.hideLoading();
                                     List<Meal> meals = response.getMeals();
                                     if (meals != null && !meals.isEmpty()) {
-                                        if (area != null && !area.equalsIgnoreCase("Unknown")) {
-                                            // Local filtering by area as requested
-                                            List<Meal> filteredMeals = meals.stream()
-                                                    .filter(meal -> area.equalsIgnoreCase(meal.getStrArea()))
-                                                    .collect(Collectors.toList());
-
-                                            if (filteredMeals.isEmpty()) {
-                                                view.showEmptyState();
-                                            } else {
-                                                view.showSearchResults(filteredMeals);
-                                            }
-                                        } else {
-                                            view.showSearchResults(meals);
-                                        }
+                                        view.showSearchResults(meals);
                                     } else {
                                         view.showEmptyState();
                                     }
+                                },
+                                throwable -> {
+                                    view.hideLoading();
+                                    view.showError(throwable.getMessage());
+                                }));
+    }
+
+    @Override
+    public void searchMealsByCategory(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            view.showEmptyState();
+            return;
+        }
+        view.showLoading();
+        disposables.add(
+                repository.getCategories()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    view.hideLoading();
+                                    List<Category> filtered = response.getCategories().stream()
+                                            .filter(c -> c.getStrCategory().toLowerCase().contains(query.toLowerCase()))
+                                            .collect(Collectors.toList());
+                                    if (!filtered.isEmpty()) {
+                                        view.showCategories(filtered);
+                                    } else {
+                                        view.showEmptyState();
+                                    }
+                                },
+                                throwable -> {
+                                    view.hideLoading();
+                                    view.showError(throwable.getMessage());
+                                }));
+    }
+
+    @Override
+    public void searchMealsByIngredient(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            view.showEmptyState();
+            return;
+        }
+        view.showLoading();
+        disposables.add(
+                repository.getIngredients()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    view.hideLoading();
+                                    List<Ingredient> filtered = response.getIngredients().stream()
+                                            .filter(i -> i.getStrIngredient().toLowerCase()
+                                                    .contains(query.toLowerCase()))
+                                            .collect(Collectors.toList());
+                                    if (!filtered.isEmpty()) {
+                                        view.showIngredients(filtered);
+                                    } else {
+                                        view.showEmptyState();
+                                    }
+                                },
+                                throwable -> {
+                                    view.hideLoading();
+                                    view.showError(throwable.getMessage());
+                                }));
+    }
+
+    @Override
+    public void searchMealsByArea(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            view.showEmptyState();
+            return;
+        }
+        view.showLoading();
+        disposables.add(
+                repository.getAreas()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    view.hideLoading();
+                                    List<Area> filtered = response.getAreas().stream()
+                                            .filter(a -> a.getStrArea().toLowerCase().contains(query.toLowerCase()))
+                                            .collect(Collectors.toList());
+                                    if (!filtered.isEmpty()) {
+                                        view.showAreas(filtered);
+                                    } else {
+                                        view.showEmptyState();
+                                    }
+                                },
+                                throwable -> {
+                                    view.hideLoading();
+                                    view.showError(throwable.getMessage());
+                                }));
+    }
+
+    @Override
+    public void getMealsByCategory(String category) {
+        view.showLoading();
+        disposables.add(
+                repository.getMealsByCategory(category)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    view.hideLoading();
+                                    view.showSearchResults(response.getMeals());
+                                },
+                                throwable -> {
+                                    view.hideLoading();
+                                    view.showError(throwable.getMessage());
+                                }));
+    }
+
+    @Override
+    public void getMealsByIngredient(String ingredient) {
+        view.showLoading();
+        disposables.add(
+                repository.getMealsByIngredient(ingredient)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    view.hideLoading();
+                                    view.showSearchResults(response.getMeals());
+                                },
+                                throwable -> {
+                                    view.hideLoading();
+                                    view.showError(throwable.getMessage());
+                                }));
+    }
+
+    @Override
+    public void getMealsByArea(String area) {
+        view.showLoading();
+        disposables.add(
+                repository.getMealsByArea(area)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    view.hideLoading();
+                                    view.showSearchResults(response.getMeals());
                                 },
                                 throwable -> {
                                     view.hideLoading();

@@ -17,9 +17,20 @@ public interface MealApi {
         @GET("list.php?a=list")
         Single<com.example.app.data.model.AreaResponse> getAreas();
 
+        @GET("list.php?i=list")
+        Single<com.example.app.data.model.IngredientResponse> getIngredients();
+
         @GET("filter.php")
         Single<MealResponse> getMealsByCategory(
                         @Query("c") String category);
+
+        @GET("filter.php")
+        Single<MealResponse> getMealsByIngredient(
+                        @Query("i") String ingredient);
+
+        @GET("filter.php")
+        Single<MealResponse> getMealsByArea(
+                        @Query("a") String area);
 
         @GET("lookup.php")
         Single<MealResponse> getMealById(

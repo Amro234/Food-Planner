@@ -18,9 +18,15 @@ public interface MealRepository {
 
     Single<MealResponse> getMealsByCategory(String category);
 
+    Single<MealResponse> getMealsByIngredient(String ingredient);
+
+    Single<MealResponse> getMealsByArea(String area);
+
     Single<MealResponse> getMealById(String mealId);
 
     Single<com.example.app.data.model.AreaResponse> getAreas();
+
+    Single<com.example.app.data.model.IngredientResponse> getIngredients();
 
     Single<MealResponse> searchMeals(String query);
 
