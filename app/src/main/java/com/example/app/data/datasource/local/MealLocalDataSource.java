@@ -19,13 +19,17 @@ public interface MealLocalDataSource {
 
     Completable insertMeals(List<MealEntity> meals);
 
+    Completable deleteMealsByUser(String userId);
+
     Completable deleteMeal(MealEntity meal);
 
     Completable deleteMealById(String mealId);
 
     Flowable<List<MealEntity>> getPlannedMeals(String userId);
 
-    Completable updateFavoriteStatus(String mealId, boolean isFavorite);
+    Flowable<List<MealEntity>> getPlannedMealsByDate(String date, String userId);
 
-    Completable updatePlannedStatus(String mealId, boolean isPlanned, String day);
+    Completable updateFavoriteStatus(String mealId, boolean isFavorite, String userId);
+
+    Completable updatePlannedStatus(String mealId, boolean isPlanned, String day, String userId);
 }

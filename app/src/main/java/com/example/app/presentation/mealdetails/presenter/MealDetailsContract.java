@@ -25,6 +25,8 @@ public interface MealDetailsContract {
 
         void addToFavorites(Meal meal);
 
+        void addToPlan(Meal meal, String day);
+
         void onDestroy();
     }
 }

@@ -34,6 +34,8 @@ public interface HomeContract {
 
         void addToFavorites(com.example.app.data.model.Meal meal);
 
+        void addToPlan(com.example.app.data.model.Meal meal, String date);
+
         void onDestroy();
     }
 }

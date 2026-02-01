@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.app.R;
 import com.example.app.data.model.Meal;
+import com.example.app.data.repository.UserRepositoryImp;
 import com.example.app.databinding.SearchViewBinding;
 import com.example.app.presentation.category.view.MealListAdapter;
 import com.example.app.presentation.search.presenter.SearchContract;
@@ -88,8 +89,23 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
             @Override
             public void onAddToFavorite(Meal meal) {
-                presenter.addToFavorites(meal);
-                Toast.makeText(requireContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
+                if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                    Toast.makeText(requireContext(), "Sign-in to add favorites!", Toast.LENGTH_SHORT).show();
+                } else {
+                    presenter.addToFavorites(meal);
+                    Toast.makeText(requireContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onAddToPlan(Meal meal) {
+                if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                    Toast.makeText(requireContext(), "Sign-in to add meals to plan!", Toast.LENGTH_SHORT).show();
+                } else {
+                    SearchFragmentDirections.ActionSearchToDetails action = SearchFragmentDirections
+                            .actionSearchToDetails(meal.getIdMeal());
+                    Navigation.findNavController(binding.getRoot()).navigate(action);
+                }
             }
         });
 

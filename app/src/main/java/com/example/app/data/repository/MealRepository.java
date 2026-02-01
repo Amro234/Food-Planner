@@ -38,9 +38,13 @@ public interface MealRepository {
 
     Flowable<List<MealEntity>> getPlannedMeals();
 
+    Flowable<List<MealEntity>> getPlannedMealsByDate(String date);
+
     Completable addToPlan(Meal meal, String day);
 
     Completable removeFromPlan(String mealId);
 
     Completable syncDataFromFirestore();
+
+    Completable initialAppSetup();
 }

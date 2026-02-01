@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseUser;
+import com.example.app.data.model.User;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import io.reactivex.rxjava3.core.Completable;
 
@@ -46,6 +49,13 @@ public class UserRepositoryImp implements UserRepository {
             mAuth.signInWithCredential(credential)
                     .addOnSuccessListener(authResult -> {
                         setGuestMode(false);
+                        FirebaseUser user = authResult.getUser();
+                        if (user != null) {
+                            User userModel = new User(user.getDisplayName(), user.getEmail());
+                            FirebaseFirestore.getInstance().collection("users")
+                                    .document(user.getUid())
+                                    .set(userModel);
+                        }
                         emitter.onComplete();
                     })
                     .addOnFailureListener(emitter::onError);
@@ -65,6 +75,18 @@ public class UserRepositoryImp implements UserRepository {
     @Override
     public String getCurrentUserId() {
         return mAuth.getUid();
+    }
+
+    @Override
+    public String getCurrentUserDisplayName() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        return (user != null) ? user.getDisplayName() : null;
+    }
+
+    @Override
+    public String getCurrentUserEmail() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        return (user != null) ? user.getEmail() : null;
     }
 
     @Override

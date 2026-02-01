@@ -23,7 +23,13 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import android.app.AlertDialog;
+import android.widget.CalendarView;
+import android.widget.Button;
 import com.example.app.data.repository.UserRepositoryImp;
 
 public class MealDetailsFragment extends Fragment implements MealDetailsContract.View {
@@ -32,6 +38,8 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
     private MealDetailsContract.Presenter presenter;
     private IngredientsAdapter ingredientsAdapter;
     private String mealId;
+    private Meal currentMeal;
+    private String selectedDateString;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +81,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
 
     @Override
     public void showMealDetails(Meal meal) {
+        this.currentMeal = meal;
         binding.mealName.setText(meal.getStrMeal());
         binding.mealCategory.setText(meal.getStrCategory());
         binding.mealArea.setText(meal.getStrArea());
@@ -90,6 +99,14 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
             }
         });
 
+        binding.btnAddToPlan.setOnClickListener(v -> {
+            if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                Toast.makeText(requireContext(), "Sign-in to add to plan!", Toast.LENGTH_SHORT).show();
+            } else {
+                showCustomCalendarDialog();
+            }
+        });
+
         if (meal.getStrYoutube() != null && !meal.getStrYoutube().isEmpty()) {
             String videoId = extractVideoId(meal.getStrYoutube());
 
@@ -104,6 +121,46 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
         } else {
             binding.youtubePlayerView.setVisibility(View.GONE);
         }
+    }
+
+    private void showCustomCalendarDialog() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View view = inflater.inflate(R.layout.dialog_calendar, null);
+
+        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        Button btnConfirm = view.findViewById(R.id.btn_confirm_date);
+
+        Calendar calendar = Calendar.getInstance();
+
+        long today = calendar.getTimeInMillis();
+        calendarView.setMinDate(today);
+
+        // Adjusting setMaxDate to allow 30 days ahead as requested for better UX
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        long endOfPeriod = calendar.getTimeInMillis();
+        calendarView.setMaxDate(endOfPeriod);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+
+        calendar = Calendar.getInstance();
+        selectedDateString = sdf.format(calendar.getTime());
+
+        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
+            Calendar clickedDate = Calendar.getInstance();
+            clickedDate.set(year, month, dayOfMonth);
+            selectedDateString = sdf.format(clickedDate.getTime());
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+
+        btnConfirm.setOnClickListener(v -> {
+            presenter.addToPlan(currentMeal, selectedDateString);
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
     private String extractVideoId(String youtubeUrl) {

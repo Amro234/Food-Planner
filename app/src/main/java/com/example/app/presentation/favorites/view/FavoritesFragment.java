@@ -92,6 +92,11 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
     }
 
     @Override
+    public void showSuccessMessage(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         presenter.onDestroy();

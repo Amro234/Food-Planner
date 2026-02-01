@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.example.app.data.repository.UserRepositoryImp;
 import com.example.app.databinding.FragmentMealitemBinding;
 import com.example.app.data.model.Meal;
 import com.example.app.presentation.category.presenter.MealListContract;
@@ -67,8 +68,22 @@ public class CategoryFragment extends Fragment implements MealListContract.View 
 
             @Override
             public void onAddToFavorite(Meal meal) {
-                presenter.addToFavorites(meal);
-                Toast.makeText(requireContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
+                if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                    Toast.makeText(requireContext(), "Sign-in to add favorites!", Toast.LENGTH_SHORT).show();
+                } else {
+                    presenter.addToFavorites(meal);
+                }
+            }
+
+            @Override
+            public void onAddToPlan(Meal meal) {
+                if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                    Toast.makeText(requireContext(), "Sign-in to add meals to plan!", Toast.LENGTH_SHORT).show();
+                } else {
+                    CategoryFragmentDirections.ActionCategoryToDetails action = CategoryFragmentDirections
+                            .actionCategoryToDetails(meal.getIdMeal());
+                    Navigation.findNavController(binding.getRoot()).navigate(action);
+                }
             }
         });
         binding.mealsRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));

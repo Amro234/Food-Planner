@@ -63,6 +63,17 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
+    public void addToPlan(com.example.app.data.model.Meal meal, String date) {
+        disposables.add(
+                repository.addToPlan(meal, date)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                () -> view.showMessage("Added to plan for " + date),
+                                this::handleError));
+    }
+
+    @Override
     public void loadRecommendedMeals() {
         disposables.add(
                 repository.getMealsByCategory("Beef") // Default recommendation for now

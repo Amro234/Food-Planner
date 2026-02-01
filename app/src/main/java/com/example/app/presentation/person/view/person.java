@@ -50,14 +50,21 @@ public class person extends Fragment {
         nameTextView = view.findViewById(R.id.profile_name);
         emailTextView = view.findViewById(R.id.profile_email);
 
-        if (mName != null && mEmail != null) {
-            nameTextView.setText(mName);
-            emailTextView.setText(mEmail);
-        } else if (userRepository.isUserLoggedIn()) {
-            fetchUserData();
-        } else {
+        if (userRepository.isGuestMode()) {
             nameTextView.setText("Guest");
             emailTextView.setText("N/A");
+        } else {
+            // First try to get from FirebaseAuth directly (fast and accurate for Google
+            // sign-in)
+            String displayName = userRepository.getCurrentUserDisplayName();
+            String email = userRepository.getCurrentUserEmail();
+
+            if (displayName != null && email != null) {
+                nameTextView.setText(displayName);
+                emailTextView.setText(email);
+            }
+            // Always fetch from Firestore to get updated/additional info
+            fetchUserData();
         }
 
         view.findViewById(R.id.Logout_id).setOnClickListener(v -> {

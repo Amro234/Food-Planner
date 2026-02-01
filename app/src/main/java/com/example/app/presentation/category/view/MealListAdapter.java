@@ -22,6 +22,8 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MealVi
         void onMealClick(Meal meal);
 
         void onAddToFavorite(Meal meal);
+
+        void onAddToPlan(Meal meal);
     }
 
     public MealListAdapter(List<Meal> meals, OnMealClickListener listener) {
@@ -78,6 +80,7 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MealVi
 
             binding.getRoot().setOnClickListener(v -> listener.onMealClick(meal));
             binding.LoveId.setOnClickListener(v -> listener.onAddToFavorite(meal));
+            binding.btnAddToPlan.setOnClickListener(v -> listener.onAddToPlan(meal));
         }
     }
 }

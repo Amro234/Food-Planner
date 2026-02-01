@@ -15,6 +15,8 @@ public interface PlanContract {
     interface Presenter {
         void getPlannedMeals();
 
+        void getPlannedMealsByDate(String date);
+
         void removeFromPlan(String mealId);
 
         void onDestroy();
