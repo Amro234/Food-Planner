@@ -20,6 +20,13 @@ import com.example.app.R;
 import com.example.app.auth.AuthActivity;
 import com.example.app.auth.login.presenter.LoginContract;
 import com.example.app.auth.login.presenter.LoginPresenter;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment implements LoginContract.View {
@@ -29,7 +36,10 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private Button loginButton;
     private TextView createAccountText;
     private TextView guestButton;
+    private MaterialCardView googleSignInCard;
     private LoginContract.Presenter presenter;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -52,6 +62,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         loginButton = view.findViewById(R.id.login_button);
         createAccountText = view.findViewById(R.id.create_account_text);
         guestButton = view.findViewById(R.id.guest_button);
+        googleSignInCard = view.findViewById(R.id.googleSignInCard);
 
         loginButton.setOnClickListener(v -> validateAndLogin());
 
@@ -62,6 +73,37 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         });
 
         guestButton.setOnClickListener(v -> presenter.loginAsGuest());
+
+        setupGoogleSignIn();
+        googleSignInCard.setOnClickListener(v -> {
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        });
+    }
+
+    private void setupGoogleSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                if (account != null) {
+                    presenter.loginWithGoogle(account.getIdToken());
+                }
+            } catch (ApiException e) {
+                Toast.makeText(getContext(), "Google sign in failed: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void validateAndLogin() {

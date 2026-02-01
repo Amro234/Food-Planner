@@ -3,6 +3,8 @@ package com.example.app.data.repository;
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.AuthCredential;
 
 import io.reactivex.rxjava3.core.Completable;
 
@@ -29,6 +31,19 @@ public class UserRepositoryImp implements UserRepository {
     public Completable loginWithEmail(String email, String password) {
         return Completable.create(emitter -> {
             mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener(authResult -> {
+                        setGuestMode(false);
+                        emitter.onComplete();
+                    })
+                    .addOnFailureListener(emitter::onError);
+        });
+    }
+
+    @Override
+    public Completable firebaseAuthWithGoogle(String idToken) {
+        return Completable.create(emitter -> {
+            AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+            mAuth.signInWithCredential(credential)
                     .addOnSuccessListener(authResult -> {
                         setGuestMode(false);
                         emitter.onComplete();
