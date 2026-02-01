@@ -13,6 +13,7 @@ import com.example.app.data.model.MealResponse;
 import com.example.app.data.repository.UserRepository;
 import com.example.app.data.repository.UserRepositoryImp;
 import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableEmitter;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MealRepositoryImp implements MealRepository {
 
@@ -181,22 +183,38 @@ public class MealRepositoryImp implements MealRepository {
     // FireStore sync back user (Favourite meals) data if user open from another
     // device
     @Override
-    public Completable syncFromFirestore() {
+    public Completable syncDataFromFirestore() {
         String userId = userRepository.getCurrentUserId();
         if (userId == null)
             return Completable.complete();
 
         return Completable.create(emitter -> {
-            firestore.collection("users").document(userId).collection("favorites")
+
+            firestore.collection("users").document(userId)
+                    .collection("favorites")
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
-                        List<MealEntity> favorites = queryDocumentSnapshots.toObjects(MealEntity.class);
-                        for (MealEntity meal : favorites) {
-                            meal.setUserId(userId);
-                            meal.setFavorite(true);
-                        }
-                        localDataSource.insertMeals(favorites)
-                                .subscribe(emitter::onComplete, emitter::onError);
+                        List<MealEntity> favMeals = queryDocumentSnapshots.toObjects(MealEntity.class);
+
+                        firestore.collection("users").document(userId)
+                                .collection("planned")
+                                .get()
+                                .addOnSuccessListener(planSnapshots -> {
+                                    List<MealEntity> plannedMeals = planSnapshots.toObjects(MealEntity.class);
+
+                                    List<MealEntity> allMeals = new ArrayList<>();
+                                    allMeals.addAll(favMeals);
+                                    allMeals.addAll(plannedMeals);
+
+                                    if (!allMeals.isEmpty()) {
+                                        localDataSource.insertMeals(allMeals)
+                                                .subscribeOn(Schedulers.io())
+                                                .subscribe(emitter::onComplete, emitter::onError);
+                                    } else {
+                                        emitter.onComplete();
+                                    }
+                                })
+                                .addOnFailureListener(emitter::onError);
                     })
                     .addOnFailureListener(emitter::onError);
         });

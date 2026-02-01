@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performInitialSetup() {
-        MealRepositoryImp.getInstance(this).syncFromFirestore()
+        MealRepositoryImp.getInstance(this).syncDataFromFirestore()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
