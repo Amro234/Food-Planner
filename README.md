@@ -28,13 +28,8 @@ Food-Planner provides a user-friendly interface to create weekly meal plans, add
 - Simple local storage (and optional cloud sync if configured)
 - Debug-friendly structure suitable for iterative development in Android Studio
 
-## Tech stack
 
-- Android (Kotlin/Java - project uses the standard Android Gradle project structure)
-- Gradle (wrapper included)
-- Optional: Firebase (if `google-services.json` is present and configured)
-
-## Detected versions (from project files)
+## Dependencies versions 
 
 - compileSdkVersion: 36 (`app/build.gradle`)
 - targetSdkVersion: 36 (`app/build.gradle`)
@@ -89,7 +84,6 @@ Command-line (Windows PowerShell):
 
 - `app/google-services.json`: If present, it contains Firebase project configuration. Keep it inside the `app/` folder.
 - Build variants: check `app/build.gradle` for product flavors or build types if your workflow uses them.
-- Secrets / API keys: Do NOT commit secrets. Use environment variables or a local gradle.properties (excluded from VCS) for private keys.
 
 ## Testing
 
@@ -119,13 +113,3 @@ If you plan to add larger features (cloud sync, authentication), open an issue f
 ## License
 
 Add the appropriate license information here (for example MIT, Apache 2.0). If you don't have a license yet, consider adding one to clarify reuse terms.
-
----
-
-If you'd like, I can also:
-
-- detect the project's compile SDK / target SDK and JDK version and add them to the README,
-- add sample screenshots or a short usage guide, or
-- generate a CONTRIBUTING.md and a small checklist for reviewers.
-
-Let me know which of these you'd like next.
