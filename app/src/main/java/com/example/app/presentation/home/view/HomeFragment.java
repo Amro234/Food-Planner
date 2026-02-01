@@ -11,6 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import android.app.AlertDialog;
+import android.widget.Button;
+import android.widget.CalendarView;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import com.bumptech.glide.Glide;
 import com.example.app.R;
@@ -32,6 +38,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private CategoryAdapter categoryAdapter;
     private MealListAdapter recommendedAdapter;
     private Meal currentRandomMeal;
+    private String selectedDateString;
 
     @Nullable
     @Override
@@ -85,6 +92,15 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                     Toast.makeText(requireContext(), "Sign-in to add favorites!", Toast.LENGTH_SHORT).show();
                 } else {
                     presenter.addToFavorites(meal);
+                }
+            }
+
+            @Override
+            public void onAddToPlan(Meal meal) {
+                if (UserRepositoryImp.getInstance(requireContext()).isGuestMode()) {
+                    Toast.makeText(requireContext(), "Sign-in to add meals to plan!", Toast.LENGTH_SHORT).show();
+                } else {
+                    showCustomCalendarDialog(meal);
                 }
             }
         }, true);
@@ -148,5 +164,44 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             presenter.onDestroy();
         }
         binding = null;
+    }
+
+    private void showCustomCalendarDialog(Meal meal) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View view = inflater.inflate(R.layout.dialog_calendar, null);
+
+        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        Button btnConfirm = view.findViewById(R.id.btn_confirm_date);
+
+        Calendar calendar = Calendar.getInstance();
+
+        long today = calendar.getTimeInMillis();
+        calendarView.setMinDate(today);
+
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        long endOfPeriod = calendar.getTimeInMillis();
+        calendarView.setMaxDate(endOfPeriod);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+
+        calendar = Calendar.getInstance();
+        selectedDateString = sdf.format(calendar.getTime());
+
+        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
+            Calendar clickedDate = Calendar.getInstance();
+            clickedDate.set(year, month, dayOfMonth);
+            selectedDateString = sdf.format(clickedDate.getTime());
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+
+        btnConfirm.setOnClickListener(v -> {
+            presenter.addToPlan(meal, selectedDateString);
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 }

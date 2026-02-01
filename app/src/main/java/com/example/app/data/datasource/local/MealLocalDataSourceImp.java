@@ -42,6 +42,11 @@ public class MealLocalDataSourceImp implements MealLocalDataSource {
     }
 
     @Override
+    public Completable deleteMealsByUser(String userId) {
+        return mealDAO.deleteMealsByUser(userId);
+    }
+
+    @Override
     public Completable deleteMeal(MealEntity meal) {
         return mealDAO.deleteMeal(meal);
     }
@@ -57,12 +62,17 @@ public class MealLocalDataSourceImp implements MealLocalDataSource {
     }
 
     @Override
-    public Completable updateFavoriteStatus(String mealId, boolean isFavorite) {
-        return mealDAO.updateFavoriteStatus(mealId, isFavorite);
+    public Flowable<List<MealEntity>> getPlannedMealsByDate(String date, String userId) {
+        return mealDAO.getPlannedMealsByDay(date, userId);
     }
 
     @Override
-    public Completable updatePlannedStatus(String mealId, boolean isPlanned, String day) {
-        return mealDAO.updatePlannedStatus(mealId, isPlanned, day);
+    public Completable updateFavoriteStatus(String mealId, boolean isFavorite, String userId) {
+        return mealDAO.updateFavoriteStatus(mealId, isFavorite, userId);
+    }
+
+    @Override
+    public Completable updatePlannedStatus(String mealId, boolean isPlanned, String day, String userId) {
+        return mealDAO.updatePlannedStatus(mealId, isPlanned, day, userId);
     }
 }

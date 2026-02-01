@@ -63,6 +63,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void loginAsGuest() {
+        userRepository.setGuestMode(true);
         saveState.setGuest(true);
         view.navigateToHome();
     }

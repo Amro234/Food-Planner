@@ -37,6 +37,23 @@ public class PlanPresenter implements PlanContract.Presenter {
     }
 
     @Override
+    public void getPlannedMealsByDate(String date) {
+        disposables.add(
+                repository.getPlannedMealsByDate(date)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                meals -> {
+                                    if (meals != null && !meals.isEmpty()) {
+                                        view.showPlannedMeals(meals);
+                                    } else {
+                                        view.showEmptyState();
+                                    }
+                                },
+                                throwable -> view.showError(throwable.getMessage())));
+    }
+
+    @Override
     public void removeFromPlan(String mealId) {
         disposables.add(
                 repository.removeFromPlan(mealId)

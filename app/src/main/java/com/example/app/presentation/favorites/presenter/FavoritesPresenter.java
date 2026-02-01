@@ -45,8 +45,8 @@ public class FavoritesPresenter implements FavoritesContract.Presenter {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                () -> {
-                                }, // View will naturally update via Flowable
+                                () -> view.showSuccessMessage("Removed from favorites"), // View will naturally update
+                                                                                         // via Flowable
                                 throwable -> view.showError(throwable.getMessage())));
     }
 

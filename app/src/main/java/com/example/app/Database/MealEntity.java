@@ -4,10 +4,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 
-@Entity(tableName = "meals")
+@Entity(tableName = "meals", primaryKeys = { "idMeal", "userId" })
 public class MealEntity {
 
-    @PrimaryKey
     @NonNull
     private String idMeal;
     private String strMeal;
@@ -67,6 +66,7 @@ public class MealEntity {
     private boolean isFavorite;
     private boolean isPlanned;
     private String plannedDay;
+    @NonNull
     private String userId;
 
     public MealEntity() {

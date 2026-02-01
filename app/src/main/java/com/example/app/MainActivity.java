@@ -86,14 +86,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performInitialSetup() {
-        MealRepositoryImp.getInstance(this).syncDataFromFirestore()
+        MealRepositoryImp.getInstance(this).initialAppSetup()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         () -> showLoading(false),
                         throwable -> {
                             showLoading(false);
-                            // Even if sync fails (e.g. guest), hide loading
+                            // Even if setup fails, hide loading to let user interact with cached data
                         });
     }
 

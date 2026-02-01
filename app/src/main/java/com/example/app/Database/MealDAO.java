@@ -45,12 +45,15 @@ public interface MealDAO {
     @Query("DELETE FROM meals")
     Completable clearAllMeals();
 
+    @Query("DELETE FROM meals WHERE userId = :userId")
+    Completable deleteMealsByUser(String userId);
+
     @Update
     Completable updateMeal(MealEntity meal);
 
-    @Query("UPDATE meals SET isFavorite = :isFavorite WHERE idMeal = :mealId")
-    Completable updateFavoriteStatus(String mealId, boolean isFavorite);
+    @Query("UPDATE meals SET isFavorite = :isFavorite WHERE idMeal = :mealId AND userId = :userId")
+    Completable updateFavoriteStatus(String mealId, boolean isFavorite, String userId);
 
-    @Query("UPDATE meals SET isPlanned = :isPlanned, plannedDay = :day WHERE idMeal = :mealId")
-    Completable updatePlannedStatus(String mealId, boolean isPlanned, String day);
+    @Query("UPDATE meals SET isPlanned = :isPlanned, plannedDay = :day WHERE idMeal = :mealId AND userId = :userId")
+    Completable updatePlannedStatus(String mealId, boolean isPlanned, String day, String userId);
 }

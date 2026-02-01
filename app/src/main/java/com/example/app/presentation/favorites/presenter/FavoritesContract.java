@@ -10,6 +10,8 @@ public interface FavoritesContract {
         void showEmptyState();
 
         void showError(String message);
+
+        void showSuccessMessage(String message);
     }
 
     interface Presenter {

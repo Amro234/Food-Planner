@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.app.databinding.ItemMealBinding;
+import com.example.app.databinding.ItemMealFavBinding;
 import com.example.app.Database.MealEntity;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanViewHolder
     @NonNull
     @Override
     public PlanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMealBinding binding = ItemMealBinding.inflate(
+        ItemMealFavBinding binding = ItemMealFavBinding.inflate(
                 LayoutInflater.from(parent.getContext()), parent, false);
         return new PlanViewHolder(binding);
     }
@@ -52,19 +52,21 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanViewHolder
     }
 
     class PlanViewHolder extends RecyclerView.ViewHolder {
-        private final ItemMealBinding binding;
+        private final ItemMealFavBinding binding;
 
-        PlanViewHolder(ItemMealBinding binding) {
+        PlanViewHolder(ItemMealFavBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
         void bind(MealEntity meal) {
-            binding.mealName.setText(meal.getStrMeal() + " (" + meal.getPlannedDay() + ")");
+            binding.mealName.setText(meal.getStrMeal());
+            binding.mealCategory.setText("Planned for: " + meal.getPlannedDay());
             Glide.with(binding.getRoot().getContext())
                     .load(meal.getStrMealThumb())
                     .into(binding.mealImage);
 
+            binding.LoveId.setOnClickListener(v -> listener.onRemoveClick(meal));
             binding.getRoot().setOnClickListener(v -> listener.onMealClick(meal));
         }
     }

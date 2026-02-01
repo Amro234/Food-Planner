@@ -14,8 +14,9 @@ import com.example.app.data.repository.UserRepository;
 import com.example.app.data.repository.UserRepositoryImp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableEmitter;
@@ -115,7 +116,9 @@ public class MealRepositoryImp implements MealRepository {
 
     @Override
     public Completable removeFromFavorites(String mealId) {
-        return localDataSource.updateFavoriteStatus(mealId, false)
+        String userId = userRepository.getCurrentUserId();
+        String finalUserId = userId != null ? userId : "guest";
+        return localDataSource.updateFavoriteStatus(mealId, false, finalUserId)
                 .andThen(Completable.create(emitter -> {
                     if (userRepository.isUserLoggedIn()) {
                         removeFromFirestore(mealId, "favorites", emitter);
@@ -132,12 +135,19 @@ public class MealRepositoryImp implements MealRepository {
     }
 
     @Override
+    public Flowable<List<MealEntity>> getPlannedMealsByDate(String date) {
+        String userId = userRepository.getCurrentUserId();
+        return localDataSource.getPlannedMealsByDate(date, userId != null ? userId : "guest");
+    }
+
+    @Override
     public Completable addToPlan(Meal meal, String day) {
         MealEntity entity = convertMealToEntity(meal);
         entity.setPlanned(true);
         entity.setPlannedDay(day);
         String userId = userRepository.getCurrentUserId();
-        entity.setUserId(userId != null ? userId : "guest");
+        String finalUserId = userId != null ? userId : "guest";
+        entity.setUserId(finalUserId);
 
         return localDataSource.insertMeal(entity)
                 .andThen(Completable.create(emitter -> {
@@ -151,7 +161,9 @@ public class MealRepositoryImp implements MealRepository {
 
     @Override
     public Completable removeFromPlan(String mealId) {
-        return localDataSource.updatePlannedStatus(mealId, false, null)
+        String userId = userRepository.getCurrentUserId();
+        String finalUserId = userId != null ? userId : "guest";
+        return localDataSource.updatePlannedStatus(mealId, false, null, finalUserId)
                 .andThen(Completable.create(emitter -> {
                     if (userRepository.isUserLoggedIn()) {
                         removeFromFirestore(mealId, "planned", emitter);
@@ -189,35 +201,64 @@ public class MealRepositoryImp implements MealRepository {
             return Completable.complete();
 
         return Completable.create(emitter -> {
-
             firestore.collection("users").document(userId)
                     .collection("favorites")
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
                         List<MealEntity> favMeals = queryDocumentSnapshots.toObjects(MealEntity.class);
+                        // Ensure userId is set correctly for all meals
+                        for (MealEntity meal : favMeals) {
+                            meal.setUserId(userId);
+                            meal.setFavorite(true);
+                        }
 
                         firestore.collection("users").document(userId)
                                 .collection("planned")
                                 .get()
                                 .addOnSuccessListener(planSnapshots -> {
                                     List<MealEntity> plannedMeals = planSnapshots.toObjects(MealEntity.class);
-
                                     List<MealEntity> allMeals = new ArrayList<>();
-                                    allMeals.addAll(favMeals);
-                                    allMeals.addAll(plannedMeals);
+                                    java.util.Map<String, MealEntity> mergedMeals = new java.util.HashMap<>();
 
-                                    if (!allMeals.isEmpty()) {
-                                        localDataSource.insertMeals(allMeals)
-                                                .subscribeOn(Schedulers.io())
-                                                .subscribe(emitter::onComplete, emitter::onError);
-                                    } else {
-                                        emitter.onComplete();
+                                    for (MealEntity meal : favMeals) {
+                                        meal.setUserId(userId);
+                                        meal.setFavorite(true);
+                                        mergedMeals.put(meal.getIdMeal(), meal);
                                     }
+
+                                    for (MealEntity meal : plannedMeals) {
+                                        if (mergedMeals.containsKey(meal.getIdMeal())) {
+                                            MealEntity existing = mergedMeals.get(meal.getIdMeal());
+                                            existing.setPlanned(true);
+                                            existing.setPlannedDay(meal.getPlannedDay());
+                                        } else {
+                                            meal.setUserId(userId);
+                                            meal.setPlanned(true);
+                                            mergedMeals.put(meal.getIdMeal(), meal);
+                                        }
+                                    }
+
+                                    allMeals.addAll(mergedMeals.values());
+
+                                    localDataSource.deleteMealsByUser(userId)
+                                            .subscribeOn(Schedulers.io())
+                                            .andThen(localDataSource.insertMeals(allMeals))
+                                            .subscribe(emitter::onComplete, emitter::onError);
                                 })
                                 .addOnFailureListener(emitter::onError);
                     })
                     .addOnFailureListener(emitter::onError);
         });
+    }
+
+    @Override
+    public Completable initialAppSetup() {
+        // Parallelly execute user sync and essential data fetching
+        // We use mergeArrayDelayError to ensure the setup completes even if one fails
+        return Completable.mergeArrayDelayError(
+                syncDataFromFirestore().subscribeOn(Schedulers.io()),
+                getCategories().ignoreElement().onErrorComplete().subscribeOn(Schedulers.io()),
+                getRandomMeal().ignoreElement().onErrorComplete().subscribeOn(Schedulers.io()));
     }
 
     private MealEntity convertMealToEntity(Meal meal) {
