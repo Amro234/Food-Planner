@@ -110,6 +110,6 @@ Command-line (Windows PowerShell):
 
 If you plan to add larger features (cloud sync, authentication), open an issue first to discuss the design.
 
-## License
+## Team Members
 
-Add the appropriate license information here (for example MIT, Apache 2.0). If you don't have a license yet, consider adding one to clarify reuse terms.
+Amro Mohamed Ali Mahmoud
